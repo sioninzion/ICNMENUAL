@@ -422,6 +422,40 @@
       overflow: hidden;
       box-shadow: var(--shadow);
     }
+    .map-card-header {
+      padding: 11px 14px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .map-card-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gray-700);
+    }
+    .map-scroll-hint {
+      font-size: 0.62rem;
+      color: var(--gray-400);
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .map-scroll-container {
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+      background: #e2eef6;
+    }
+    .map-scroll-container::-webkit-scrollbar { height: 3px; }
+    .map-scroll-container::-webkit-scrollbar-thumb { background: #b0c8d8; border-radius: 2px; }
+    .map-note {
+      padding: 6px 14px 10px;
+      font-size: 0.62rem;
+      color: var(--gray-400);
+      text-align: center;
+    }
     .terminal-map {
       background: #e8f4f8;
       padding: 20px 12px;
@@ -869,103 +903,204 @@
       <h2>터미널 내 식당 위치 안내</h2>
     </div>
 
-    <!-- Terminal Map -->
+    <!-- Terminal Map (SVG real silhouette) -->
     <div class="map-section">
       <div class="map-card">
-        <div class="terminal-map">
-          <div class="map-title">제2여객터미널 면세구역 (4층 기준)</div>
-          <!-- Simplified terminal map -->
-          <div style="position:relative; background:#daeaf5; border-radius:10px; padding:16px 8px; min-height:160px;">
-            <!-- Wing structure -->
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <!-- Left gates -->
-              <div style="display:flex; gap:16px;">
-                <div class="gate-marker">
-                  <div class="gate-dot multi"></div>
-                  <div class="gate-label">227</div>
-                </div>
-                <div class="gate-marker">
-                  <div class="gate-dot korean"></div>
-                  <div class="gate-label">231</div>
-                </div>
-                <div class="gate-marker">
-                  <div class="gate-dot japanese"></div>
-                  <div class="gate-label">234</div>
-                </div>
-              </div>
-              <!-- Right gates -->
-              <div style="display:flex; gap:16px;">
-                <div class="gate-marker">
-                  <div class="gate-dot cafe"></div>
-                  <div class="gate-label">266</div>
-                </div>
-                <div class="gate-marker">
-                  <div class="gate-dot cafe"></div>
-                  <div class="gate-label">268</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Central body -->
-            <div style="display:flex; justify-content:center; margin:8px 0;">
-              <div style="background:#b8d4e8; border-radius:8px; padding:8px 32px; text-align:center;">
-                <div style="font-size:0.6rem; font-weight:700; color:#4b5563;">면세점 (DUTY FREE)</div>
-              </div>
-            </div>
-
-            <!-- Central + East gates -->
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-              <div style="display:flex; gap:12px;">
-                <div class="gate-marker">
-                  <div class="gate-dot multi"></div>
-                  <div class="gate-label">247</div>
-                </div>
-                <div class="gate-marker">
-                  <div class="gate-dot korean"></div>
-                  <div class="gate-label">251</div>
-                </div>
-                <div class="gate-marker" style="align-items:center;">
-                  <div style="display:flex; gap:3px;">
-                    <div class="gate-dot korean"></div>
-                    <div class="gate-dot asian"></div>
-                    <div class="gate-dot cafe"></div>
-                  </div>
-                  <div class="gate-label">252-253</div>
-                </div>
-              </div>
-              <div style="display:flex; gap:12px;">
-                <div class="gate-marker">
-                  <div style="display:flex; gap:3px;">
-                    <div class="gate-dot korean"></div>
-                    <div class="gate-dot asian"></div>
-                    <div class="gate-dot cafe"></div>
-                  </div>
-                  <div class="gate-label">248-249</div>
-                </div>
-                <div class="gate-marker">
-                  <div class="gate-dot korean"></div>
-                  <div class="gate-label">274</div>
-                </div>
-              </div>
-            </div>
-
-            <div style="text-align:center; font-size:0.58rem; color:#6b7280; margin-top:10px;">
-              ※ 위 지도는 대략적인 위치를 나타내며 실제 배치와 다를 수 있습니다
-            </div>
-          </div>
+        <div class="map-card-header">
+          <span class="map-card-title">🛫 제2여객터미널 탑승구 위치도</span>
+          <span class="map-scroll-hint">← 스크롤 →</span>
         </div>
 
-        <!-- Legend -->
-        <div class="map-legend">
-          <div class="legend-title">색상 범례</div>
-          <div class="legend-items">
-            <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div>한식</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>일식</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>아시안/분식</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>카페</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div>복합 (다수)</div>
-          </div>
+        <div class="map-scroll-container">
+          <!-- SVG based on actual T2 concourse silhouette.
+               Left arm: Gate 226-247 (angled, SW wing)
+               Right arm: Gate 248-274 (nearly horizontal, NE wing)
+               Centerline: left=(80,220)→(400,145), right=(400,145)→(762,128)
+          -->
+          <svg width="830" height="270" viewBox="0 0 830 270" xmlns="http://www.w3.org/2000/svg" style="display:block">
+            <defs>
+              <filter id="lbl" x="-30%" y="-30%" width="160%" height="160%">
+                <feFlood flood-color="rgba(255,255,255,0.88)" result="bg"/>
+                <feMerge><feMergeNode in="bg"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <!-- Sky background -->
+            <rect width="830" height="270" fill="#e0ecf5"/>
+
+            <!-- Apron tint strips (above and below concourse) -->
+            <rect x="0" y="0" width="830" height="108" fill="#d4e8f2" opacity="0.5"/>
+            <rect x="0" y="182" width="830" height="88" fill="#d4e8f2" opacity="0.5"/>
+
+            <!-- ===== ALL GATE STUBS (drawn before terminal body) ===== -->
+            <!-- Gray stubs (non-restaurant) -->
+            <!-- LEFT ARM gray stubs -->
+            <line x1="127" y1="223" x2="132" y2="244" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="184" y1="209" x2="189" y2="230" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="228" y1="199" x2="233" y2="220" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="251" y1="166" x2="246" y2="145" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="286" y1="185" x2="291" y2="206" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="309" y1="152" x2="304" y2="131" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="344" y1="171" x2="349" y2="192" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="367" y1="138" x2="362" y2="117" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <!-- RIGHT ARM gray stubs -->
+            <line x1="400" y1="132" x2="400" y2="110" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="442" y1="130" x2="442" y2="108" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="498" y1="128" x2="498" y2="106" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="526" y1="152" x2="526" y2="174" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="553" y1="126" x2="553" y2="104" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="581" y1="150" x2="581" y2="172" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="609" y1="124" x2="609" y2="102" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="637" y1="148" x2="637" y2="170" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="706" y1="118" x2="706" y2="96"  stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="734" y1="145" x2="734" y2="167" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+
+            <!-- RESTAURANT stubs (colored) -->
+            <!-- G227 above-left arm  → 소갈보올 (red) -->
+            <line x1="92"  y1="204" x2="87"  y2="183" stroke="#ef4444" stroke-width="9" stroke-linecap="round"/>
+            <!-- G231 above-left arm  → 투썸플레이스 (green) -->
+            <line x1="149" y1="190" x2="144" y2="169" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
+            <!-- G234 above-left arm  → 무코쿠 (blue, 3F) -->
+            <line x1="193" y1="180" x2="188" y2="159" stroke="#3b82f6" stroke-width="9" stroke-linecap="round"/>
+            <!-- G249 below-right arm → 플레잉 푸드코트 cluster (orange) -->
+            <line x1="414" y1="157" x2="414" y2="179" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>
+            <!-- G252 above-right arm → 옥수고집 (red) -->
+            <line x1="456" y1="129" x2="456" y2="107" stroke="#ef4444" stroke-width="9" stroke-linecap="round"/>
+            <!-- G253 above-right arm → 던킨 (green, 3F) -->
+            <line x1="470" y1="129" x2="470" y2="107" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
+            <!-- G266 below-right arm → 리나스 (green) -->
+            <line x1="651" y1="146" x2="651" y2="168" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
+            <!-- G268 above-right arm → 파스쿠찌 (green) -->
+            <line x1="678" y1="119" x2="678" y2="97"  stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
+            <!-- G274 below-right arm → 자연담은한상 (red) -->
+            <line x1="761" y1="141" x2="761" y2="163" stroke="#ef4444" stroke-width="9" stroke-linecap="round"/>
+
+            <!-- ===== TERMINAL BODY (concourse silhouette) ===== -->
+            <!--  Left arm  centerline: (80,220)→(400,145)  corridor half-width=13
+                  Perp offset: (±3, ±13) approx
+                  Top-left edge : (77,207) → bezier → (397,132)
+                  Bottom-right  : (83,233) → bezier → (403,158)
+                  Right arm     : straight (397,132)→(762,115) top, (764,141)→(403,158) bottom -->
+            <path d="M 77,207 C 196,176 312,154 397,132
+                     L 762,115 L 764,141
+                     L 403,158 C 306,172 194,197 83,233 Z"
+                  fill="#bcd5e5" stroke="#80a8c0" stroke-width="1.5" stroke-linejoin="round"/>
+
+            <!-- Main terminal building block (landside, left) -->
+            <rect x="36" y="180" width="46" height="22" fill="#bcd5e5" stroke="none"/>
+            <rect x="0"  y="152" width="42" height="92" rx="3"
+                  fill="#a6c2d6" stroke="#78a0b6" stroke-width="1.5"/>
+            <text x="21" y="191" font-size="7" fill="#1a3a5a" text-anchor="middle"
+                  font-family="sans-serif" font-weight="bold">터미널</text>
+            <text x="21" y="202" font-size="7" fill="#1a3a5a" text-anchor="middle"
+                  font-family="sans-serif" font-weight="bold">본관</text>
+            <text x="21" y="214" font-size="6" fill="#2d6080" text-anchor="middle"
+                  font-family="sans-serif">(일반구역)</text>
+
+            <!-- ===== 일반구역 3층 식당 callout ===== -->
+            <rect x="2" y="8" width="126" height="56" rx="5"
+                  fill="rgba(209,250,229,0.97)" stroke="#34d399" stroke-width="1.5"/>
+            <text x="65" y="23" font-size="7.5" fill="#065f46" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700">🏬 일반구역 3층</text>
+            <text x="65" y="35" font-size="7"   fill="#047857" text-anchor="middle"
+                  font-family="sans-serif">쉐이크쉑 · 롯데리아</text>
+            <text x="65" y="47" font-size="7"   fill="#047857" text-anchor="middle"
+                  font-family="sans-serif">파리바게뜨</text>
+            <text x="65" y="57" font-size="6"   fill="#6b7280" text-anchor="middle"
+                  font-family="sans-serif">(탑승권 불필요)</text>
+
+            <!-- ===== RESTAURANT MARKERS ===== -->
+
+            <!-- 소갈보올 (G227 above-left) -->
+            <circle cx="87" cy="183" r="5.5" fill="#ef4444" stroke="white" stroke-width="1.5"/>
+            <text x="87"  y="172" font-size="7.5" fill="#7f1d1d" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">소갈보올</text>
+
+            <!-- 투썸플레이스 (G231 above-left) -->
+            <circle cx="144" cy="169" r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
+            <text x="144" y="158" font-size="7.5" fill="#065f46" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">투썸플레이스</text>
+
+            <!-- 무코쿠 (G234 above-left, 3F) -->
+            <circle cx="188" cy="159" r="5.5" fill="#3b82f6" stroke="white" stroke-width="1.5"/>
+            <text x="188" y="148" font-size="7.5" fill="#1e3a8a" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">무코쿠</text>
+            <text x="188" y="138" font-size="6.5" fill="#1d4ed8" text-anchor="middle"
+                  font-family="sans-serif" filter="url(#lbl)">(3층)</text>
+
+            <!-- 플레잉 푸드코트 cluster callout (G249 below-right) -->
+            <rect x="355" y="182" width="118" height="72" rx="5"
+                  fill="rgba(255,247,205,0.97)" stroke="#f59e0b" stroke-width="1.5"/>
+            <circle cx="414" cy="179" r="6.5" fill="#f59e0b" stroke="white" stroke-width="2"/>
+            <text x="414" y="196" font-size="7.5" fill="#92400e" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700">🍽 플레잉 푸드코트</text>
+            <text x="414" y="208" font-size="6.5" fill="#b45309" text-anchor="middle"
+                  font-family="sans-serif">효자공담 · 호호가츠</text>
+            <text x="414" y="219" font-size="6.5" fill="#b45309" text-anchor="middle"
+                  font-family="sans-serif">소달반상 · 콘타이</text>
+            <text x="414" y="230" font-size="6.5" fill="#b45309" text-anchor="middle"
+                  font-family="sans-serif">택싱5 · 스타벅스</text>
+            <text x="414" y="243" font-size="6"   fill="#78350f" text-anchor="middle"
+                  font-family="sans-serif">249번 게이트 · 4층 면세구역</text>
+
+            <!-- 옥수고집 (G252 above-right) -->
+            <circle cx="456" cy="107" r="5.5" fill="#ef4444" stroke="white" stroke-width="1.5"/>
+            <text x="456" y="96"  font-size="7.5" fill="#7f1d1d" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">옥수고집</text>
+
+            <!-- 던킨 (G253 above-right, 3F) -->
+            <circle cx="470" cy="107" r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
+            <text x="472" y="84"  font-size="7"   fill="#065f46" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">던킨(3층)</text>
+
+            <!-- 리나스 (G266 below-right) -->
+            <circle cx="651" cy="168" r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
+            <text x="651" y="183" font-size="7.5" fill="#065f46" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">리나스(3층)</text>
+
+            <!-- 파스쿠찌 (G268 above-right) -->
+            <circle cx="678" cy="97"  r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
+            <text x="678" y="86"  font-size="7.5" fill="#065f46" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">파스쿠찌</text>
+
+            <!-- 자연담은한상 (G274 below-right) -->
+            <circle cx="761" cy="163" r="5.5" fill="#ef4444" stroke="white" stroke-width="1.5"/>
+            <text x="761" y="178" font-size="7.5" fill="#7f1d1d" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">자연담은한상</text>
+
+            <!-- ===== GATE NUMBER LABELS ===== -->
+            <text x="87"  y="260" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.227</text>
+            <text x="150" y="164" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.231</text>
+            <text x="196" y="153" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.234</text>
+            <text x="414" y="173" font-size="7" fill="#b45309" text-anchor="middle" font-family="sans-serif" font-weight="700">G.249</text>
+            <text x="455" y="120" font-size="7" fill="#4b6478" text-anchor="end"    font-family="sans-serif">G.252</text>
+            <text x="474" y="120" font-size="7" fill="#4b6478" text-anchor="start"  font-family="sans-serif">/253</text>
+            <text x="651" y="161" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.266</text>
+            <text x="678" y="110" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.268</text>
+            <text x="761" y="156" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.274</text>
+
+            <!-- Wing range labels -->
+            <text x="220" y="262" font-size="7.5" fill="#5a7a90" text-anchor="middle"
+                  font-family="sans-serif" font-style="italic">← G.226–247 서쪽 날개</text>
+            <text x="600" y="97"  font-size="7.5" fill="#5a7a90" text-anchor="middle"
+                  font-family="sans-serif" font-style="italic">G.248–274 동쪽 날개 →</text>
+
+            <!-- ===== LEGEND ===== -->
+            <rect x="624" y="10" width="200" height="58" rx="5"
+                  fill="rgba(255,255,255,0.93)" stroke="#d1d5db" stroke-width="1"/>
+            <circle cx="635" cy="25"  r="4.5" fill="#ef4444"/>
+            <text   x="643" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">한식</text>
+            <circle cx="672" cy="25"  r="4.5" fill="#3b82f6"/>
+            <text   x="680" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">일식/돈카츠</text>
+            <circle cx="748" cy="25"  r="4.5" fill="#f59e0b"/>
+            <text   x="756" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">아시안</text>
+            <circle cx="635" cy="42"  r="4.5" fill="#10b981"/>
+            <text   x="643" y="46"   font-size="7.5" fill="#374151" font-family="sans-serif">카페</text>
+            <text   x="635" y="61"   font-size="6.5" fill="#9ca3af" font-family="sans-serif">탑승구 기준 실루엣 약도</text>
+          </svg>
         </div>
+
+        <div class="map-note">※ 실제 터미널 평면도를 단순화한 약도입니다 — 방문 전 현장 확인 권장</div>
       </div>
     </div>
 
