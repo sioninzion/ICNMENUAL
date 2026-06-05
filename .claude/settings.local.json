@@ -15,7 +15,9 @@
       "Bash(git commit -m ' *)",
       "Bash(git branch *)",
       "WebFetch(domain:www.ifly.com)",
-      "WebFetch(domain:all-maps.com)"
+      "WebFetch(domain:all-maps.com)",
+      "WebFetch(domain:creatrip.com)",
+      "WebFetch(domain:www.airportmaps.com)"
     ]
   }
 }
