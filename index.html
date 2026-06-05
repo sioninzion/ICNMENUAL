@@ -450,6 +450,96 @@
     }
     .map-scroll-container::-webkit-scrollbar { height: 3px; }
     .map-scroll-container::-webkit-scrollbar-thumb { background: #b0c8d8; border-radius: 2px; }
+
+    /* Floor toggle */
+    .floor-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 8px 14px;
+    }
+    .floor-btn {
+      padding: 9px;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--gray-200);
+      background: var(--white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gray-500);
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .floor-btn.active {
+      border-color: var(--blue-mid);
+      background: var(--blue-mid);
+      color: white;
+    }
+
+    /* Timetable button */
+    .timetable-btn {
+      flex-shrink: 0;
+      background: rgba(255,255,255,0.18);
+      border: 1.5px solid rgba(255,255,255,0.45);
+      border-radius: 20px;
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+      margin-top: 3px;
+    }
+    .timetable-btn:active { opacity: 0.75; }
+
+    /* Timetable modal timeline */
+    .timeline-item {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-time {
+      min-width: 86px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--blue-mid);
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .timeline-content { flex: 1; }
+    .timeline-main {
+      font-size: 0.83rem;
+      color: var(--gray-800);
+      line-height: 1.5;
+      margin-bottom: 2px;
+      font-weight: 500;
+    }
+    .timeline-note {
+      font-size: 0.7rem;
+      color: var(--gray-500);
+      line-height: 1.4;
+    }
+    .timeline-item.highlight {
+      background: var(--orange-light);
+      border-left: 3px solid var(--orange);
+      padding: 8px 10px;
+      border-radius: 0 8px 8px 0;
+      margin: 2px 0;
+      border-bottom: none;
+    }
+    .timeline-item.depart {
+      background: var(--blue-light);
+      border-radius: 8px;
+      padding: 10px 12px;
+      border-bottom: none;
+    }
+    .timeline-item.depart .timeline-time { color: var(--blue); }
+    .timeline-item.depart .timeline-main { color: var(--blue); font-weight: 700; }
+
     .map-note {
       padding: 6px 14px 10px;
       font-size: 0.62rem;
@@ -841,7 +931,10 @@
   <div class="hero-badge">
     🍽️ 새벽 이용 가능 식당 가이드
   </div>
-  <h1>새벽 이용 가능<br>식당 가이드</h1>
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:4px;">
+    <h1 style="margin-bottom:0;">새벽 이용 가능<br>식당 가이드</h1>
+    <button class="timetable-btn" onclick="openTimetable()">📅 일정표</button>
+  </div>
   <p class="hero-sub">6/26(목) 몽골 올란바타르 출국 단체 식사 안내</p>
   <div class="flight-grid">
     <div class="flight-card">
@@ -855,7 +948,7 @@
       <div class="flight-card-icon">🕗</div>
       <div>
         <div class="flight-card-label">출발일시</div>
-        <div class="flight-card-value">6/26(목) 08:30</div>
+        <div class="flight-card-value">6/26(목) 08:35</div>
       </div>
     </div>
     <div class="flight-card">
@@ -911,15 +1004,16 @@
           <span class="map-scroll-hint">← 스크롤 →</span>
         </div>
 
-        <div class="map-scroll-container">
-          <!-- SVG based on actual T2 concourse silhouette.
-               Left arm: Gate 226-247 (angled, SW wing)
-               Right arm: Gate 248-274 (nearly horizontal, NE wing)
-               Centerline: left=(80,220)→(400,145), right=(400,145)→(762,128)
-          -->
+        <div class="floor-toggle">
+          <button class="floor-btn active" onclick="setFloor('4f', this)">🛃 4층 면세구역</button>
+          <button class="floor-btn" onclick="setFloor('3f', this)">🏬 3층</button>
+        </div>
+
+        <!-- 4F Map -->
+        <div id="map-4f" class="map-scroll-container">
           <svg width="830" height="270" viewBox="0 0 830 270" xmlns="http://www.w3.org/2000/svg" style="display:block">
             <defs>
-              <filter id="lbl" x="-30%" y="-30%" width="160%" height="160%">
+              <filter id="lbl4" x="-30%" y="-30%" width="160%" height="160%">
                 <feFlood flood-color="rgba(255,255,255,0.88)" result="bg"/>
                 <feMerge><feMergeNode in="bg"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
@@ -955,24 +1049,17 @@
             <line x1="706" y1="118" x2="706" y2="96"  stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
             <line x1="734" y1="145" x2="734" y2="167" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
 
-            <!-- RESTAURANT stubs (colored) -->
-            <!-- G227 above-left arm  → 소갈보올 (red) -->
+            <!-- Restaurant stubs: 4F colored, 3F positions shown gray -->
             <line x1="92"  y1="204" x2="87"  y2="183" stroke="#ef4444" stroke-width="9" stroke-linecap="round"/>
-            <!-- G231 above-left arm  → 투썸플레이스 (green) -->
             <line x1="149" y1="190" x2="144" y2="169" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
-            <!-- G234 above-left arm  → 무코쿠 (blue, 3F) -->
-            <line x1="193" y1="180" x2="188" y2="159" stroke="#3b82f6" stroke-width="9" stroke-linecap="round"/>
-            <!-- G249 below-right arm → 플레잉 푸드코트 cluster (orange) -->
+            <!-- G234 = 3층 무코쿠 → gray on 4F view -->
+            <line x1="193" y1="180" x2="188" y2="159" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
             <line x1="414" y1="157" x2="414" y2="179" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>
-            <!-- G252 above-right arm → 옥수고집 (red) -->
             <line x1="456" y1="129" x2="456" y2="107" stroke="#ef4444" stroke-width="9" stroke-linecap="round"/>
-            <!-- G253 above-right arm → 던킨 (green, 3F) -->
-            <line x1="470" y1="129" x2="470" y2="107" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
-            <!-- G266 below-right arm → 리나스 (green) -->
-            <line x1="651" y1="146" x2="651" y2="168" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
-            <!-- G268 above-right arm → 파스쿠찌 (green) -->
+            <!-- G253 = 3층 던킨, G266 = 3층 리나스 → gray on 4F view -->
+            <line x1="470" y1="129" x2="470" y2="107" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="651" y1="146" x2="651" y2="168" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
             <line x1="678" y1="119" x2="678" y2="97"  stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
-            <!-- G274 below-right arm → 자연담은한상 (red) -->
             <line x1="761" y1="141" x2="761" y2="163" stroke="#ef4444" stroke-width="9" stroke-linecap="round"/>
 
             <!-- ===== TERMINAL BODY (concourse silhouette) ===== -->
@@ -997,36 +1084,25 @@
             <text x="21" y="214" font-size="6" fill="#2d6080" text-anchor="middle"
                   font-family="sans-serif">(일반구역)</text>
 
-            <!-- ===== 일반구역 3층 식당 callout ===== -->
-            <rect x="2" y="8" width="126" height="56" rx="5"
-                  fill="rgba(209,250,229,0.97)" stroke="#34d399" stroke-width="1.5"/>
-            <text x="65" y="23" font-size="7.5" fill="#065f46" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700">🏬 일반구역 3층</text>
-            <text x="65" y="35" font-size="7"   fill="#047857" text-anchor="middle"
-                  font-family="sans-serif">쉐이크쉑 · 롯데리아</text>
-            <text x="65" y="47" font-size="7"   fill="#047857" text-anchor="middle"
-                  font-family="sans-serif">파리바게뜨</text>
-            <text x="65" y="57" font-size="6"   fill="#6b7280" text-anchor="middle"
-                  font-family="sans-serif">(탑승권 불필요)</text>
+            <!-- 3F note callout -->
+            <rect x="2" y="8" width="128" height="36" rx="5"
+                  fill="rgba(239,246,255,0.95)" stroke="#93c5fd" stroke-width="1.5"/>
+            <text x="66" y="23" font-size="7" fill="#1e3a8a" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700">* 3층 매장(무코쿠·던킨·리나스)</text>
+            <text x="66" y="37" font-size="7" fill="#1d4ed8" text-anchor="middle"
+                  font-family="sans-serif">→ [3층] 버튼에서 확인</text>
 
             <!-- ===== RESTAURANT MARKERS ===== -->
 
             <!-- 소갈보올 (G227 above-left) -->
             <circle cx="87" cy="183" r="5.5" fill="#ef4444" stroke="white" stroke-width="1.5"/>
             <text x="87"  y="172" font-size="7.5" fill="#7f1d1d" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">소갈보올</text>
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">소갈보올</text>
 
             <!-- 투썸플레이스 (G231 above-left) -->
             <circle cx="144" cy="169" r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
             <text x="144" y="158" font-size="7.5" fill="#065f46" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">투썸플레이스</text>
-
-            <!-- 무코쿠 (G234 above-left, 3F) -->
-            <circle cx="188" cy="159" r="5.5" fill="#3b82f6" stroke="white" stroke-width="1.5"/>
-            <text x="188" y="148" font-size="7.5" fill="#1e3a8a" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">무코쿠</text>
-            <text x="188" y="138" font-size="6.5" fill="#1d4ed8" text-anchor="middle"
-                  font-family="sans-serif" filter="url(#lbl)">(3층)</text>
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">투썸플레이스</text>
 
             <!-- 플레잉 푸드코트 cluster callout (G249 below-right) -->
             <rect x="355" y="182" width="118" height="72" rx="5"
@@ -1046,36 +1122,23 @@
             <!-- 옥수고집 (G252 above-right) -->
             <circle cx="456" cy="107" r="5.5" fill="#ef4444" stroke="white" stroke-width="1.5"/>
             <text x="456" y="96"  font-size="7.5" fill="#7f1d1d" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">옥수고집</text>
-
-            <!-- 던킨 (G253 above-right, 3F) -->
-            <circle cx="470" cy="107" r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
-            <text x="472" y="84"  font-size="7"   fill="#065f46" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">던킨(3층)</text>
-
-            <!-- 리나스 (G266 below-right) -->
-            <circle cx="651" cy="168" r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
-            <text x="651" y="183" font-size="7.5" fill="#065f46" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">리나스(3층)</text>
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">옥수고집</text>
 
             <!-- 파스쿠찌 (G268 above-right) -->
             <circle cx="678" cy="97"  r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
             <text x="678" y="86"  font-size="7.5" fill="#065f46" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">파스쿠찌</text>
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">파스쿠찌</text>
 
             <!-- 자연담은한상 (G274 below-right) -->
             <circle cx="761" cy="163" r="5.5" fill="#ef4444" stroke="white" stroke-width="1.5"/>
             <text x="761" y="178" font-size="7.5" fill="#7f1d1d" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl)">자연담은한상</text>
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">자연담은한상</text>
 
-            <!-- ===== GATE NUMBER LABELS ===== -->
+            <!-- Gate labels (4F restaurants) -->
             <text x="87"  y="260" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.227</text>
             <text x="150" y="164" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.231</text>
-            <text x="196" y="153" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.234</text>
             <text x="414" y="173" font-size="7" fill="#b45309" text-anchor="middle" font-family="sans-serif" font-weight="700">G.249</text>
-            <text x="455" y="120" font-size="7" fill="#4b6478" text-anchor="end"    font-family="sans-serif">G.252</text>
-            <text x="474" y="120" font-size="7" fill="#4b6478" text-anchor="start"  font-family="sans-serif">/253</text>
-            <text x="651" y="161" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.266</text>
+            <text x="456" y="120" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.252</text>
             <text x="678" y="110" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.268</text>
             <text x="761" y="156" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.274</text>
 
@@ -1085,22 +1148,137 @@
             <text x="600" y="97"  font-size="7.5" fill="#5a7a90" text-anchor="middle"
                   font-family="sans-serif" font-style="italic">G.248–274 동쪽 날개 →</text>
 
-            <!-- ===== LEGEND ===== -->
-            <rect x="624" y="10" width="200" height="58" rx="5"
+            <!-- Legend (4F) -->
+            <rect x="624" y="10" width="200" height="48" rx="5"
                   fill="rgba(255,255,255,0.93)" stroke="#d1d5db" stroke-width="1"/>
             <circle cx="635" cy="25"  r="4.5" fill="#ef4444"/>
             <text   x="643" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">한식</text>
-            <circle cx="672" cy="25"  r="4.5" fill="#3b82f6"/>
-            <text   x="680" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">일식/돈카츠</text>
-            <circle cx="748" cy="25"  r="4.5" fill="#f59e0b"/>
-            <text   x="756" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">아시안</text>
-            <circle cx="635" cy="42"  r="4.5" fill="#10b981"/>
-            <text   x="643" y="46"   font-size="7.5" fill="#374151" font-family="sans-serif">카페</text>
-            <text   x="635" y="61"   font-size="6.5" fill="#9ca3af" font-family="sans-serif">탑승구 기준 실루엣 약도</text>
+            <circle cx="672" cy="25"  r="4.5" fill="#10b981"/>
+            <text   x="680" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">카페</text>
+            <circle cx="710" cy="25"  r="4.5" fill="#f59e0b"/>
+            <text   x="718" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">푸드코트</text>
+            <text   x="635" y="50"   font-size="6.5" fill="#9ca3af" font-family="sans-serif">4층 면세구역 · 탑승구 기준 약도</text>
           </svg>
         </div>
 
-        <div class="map-note">※ 실제 터미널 평면도를 단순화한 약도입니다 — 방문 전 현장 확인 권장</div>
+        <!-- 3F Map -->
+        <div id="map-3f" class="map-scroll-container" style="display:none">
+          <svg width="830" height="270" viewBox="0 0 830 270" xmlns="http://www.w3.org/2000/svg" style="display:block">
+            <defs>
+              <filter id="lbl3" x="-30%" y="-30%" width="160%" height="160%">
+                <feFlood flood-color="rgba(255,255,255,0.88)" result="bg"/>
+                <feMerge><feMergeNode in="bg"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <rect width="830" height="270" fill="#e4f0ed"/>
+            <rect x="0" y="0" width="830" height="108" fill="#d0e8e2" opacity="0.5"/>
+            <rect x="0" y="182" width="830" height="88" fill="#d0e8e2" opacity="0.5"/>
+
+            <!-- All gate stubs gray (4F restaurant positions gray on 3F view) -->
+            <line x1="127" y1="223" x2="132" y2="244" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="184" y1="209" x2="189" y2="230" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="228" y1="199" x2="233" y2="220" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="251" y1="166" x2="246" y2="145" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="286" y1="185" x2="291" y2="206" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="309" y1="152" x2="304" y2="131" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="344" y1="171" x2="349" y2="192" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="367" y1="138" x2="362" y2="117" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <!-- G227/G231 4F positions → gray -->
+            <line x1="92"  y1="204" x2="87"  y2="183" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="149" y1="190" x2="144" y2="169" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <!-- Right arm -->
+            <line x1="400" y1="132" x2="400" y2="110" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="442" y1="130" x2="442" y2="108" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="498" y1="128" x2="498" y2="106" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="526" y1="152" x2="526" y2="174" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="553" y1="126" x2="553" y2="104" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="581" y1="150" x2="581" y2="172" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="609" y1="124" x2="609" y2="102" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="637" y1="148" x2="637" y2="170" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="706" y1="118" x2="706" y2="96"  stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="734" y1="145" x2="734" y2="167" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <!-- G249/G252/G268/G274 4F positions → gray -->
+            <line x1="414" y1="157" x2="414" y2="179" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="456" y1="129" x2="456" y2="107" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="678" y1="119" x2="678" y2="97"  stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="761" y1="141" x2="761" y2="163" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+
+            <!-- 3F restaurant stubs (colored) -->
+            <line x1="193" y1="180" x2="188" y2="159" stroke="#3b82f6" stroke-width="9" stroke-linecap="round"/>
+            <line x1="470" y1="129" x2="470" y2="107" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
+            <line x1="651" y1="146" x2="651" y2="168" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
+
+            <!-- Terminal body -->
+            <path d="M 77,207 C 196,176 312,154 397,132
+                     L 762,115 L 764,141
+                     L 403,158 C 306,172 194,197 83,233 Z"
+                  fill="#bcd5e5" stroke="#80a8c0" stroke-width="1.5" stroke-linejoin="round"/>
+
+            <!-- Terminal building block -->
+            <rect x="36" y="180" width="46" height="22" fill="#bcd5e5" stroke="none"/>
+            <rect x="0"  y="152" width="42" height="92" rx="3"
+                  fill="#a6c2d6" stroke="#78a0b6" stroke-width="1.5"/>
+            <text x="21" y="191" font-size="7" fill="#1a3a5a" text-anchor="middle"
+                  font-family="sans-serif" font-weight="bold">터미널</text>
+            <text x="21" y="202" font-size="7" fill="#1a3a5a" text-anchor="middle"
+                  font-family="sans-serif" font-weight="bold">본관</text>
+            <text x="21" y="214" font-size="6" fill="#2d6080" text-anchor="middle"
+                  font-family="sans-serif">(일반구역)</text>
+
+            <!-- 일반구역 3층 callout -->
+            <rect x="2" y="8" width="126" height="56" rx="5"
+                  fill="rgba(209,250,229,0.97)" stroke="#34d399" stroke-width="1.5"/>
+            <text x="65" y="23" font-size="7.5" fill="#065f46" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700">🏬 일반구역 3층</text>
+            <text x="65" y="35" font-size="7"   fill="#047857" text-anchor="middle"
+                  font-family="sans-serif">쉐이크쉑 · 롯데리아</text>
+            <text x="65" y="47" font-size="7"   fill="#047857" text-anchor="middle"
+                  font-family="sans-serif">파리바게뜨</text>
+            <text x="65" y="57" font-size="6"   fill="#6b7280" text-anchor="middle"
+                  font-family="sans-serif">(탑승권 불필요)</text>
+
+            <!-- 무코쿠 G234 -->
+            <circle cx="188" cy="159" r="5.5" fill="#3b82f6" stroke="white" stroke-width="1.5"/>
+            <text x="188" y="148" font-size="7.5" fill="#1e3a8a" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl3)">무코쿠</text>
+            <text x="188" y="138" font-size="6.5" fill="#1d4ed8" text-anchor="middle"
+                  font-family="sans-serif" filter="url(#lbl3)">(3층)</text>
+
+            <!-- 던킨 G253 -->
+            <circle cx="470" cy="107" r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
+            <text x="472" y="84"  font-size="7"   fill="#065f46" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl3)">던킨(3층)</text>
+
+            <!-- 리나스 G266 -->
+            <circle cx="651" cy="168" r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
+            <text x="651" y="183" font-size="7.5" fill="#065f46" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl3)">리나스(3층)</text>
+
+            <!-- Gate labels (3F) -->
+            <text x="196" y="153" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.234</text>
+            <text x="474" y="120" font-size="7" fill="#4b6478" text-anchor="start"  font-family="sans-serif">G.253</text>
+            <text x="651" y="161" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.266</text>
+
+            <!-- Wing labels -->
+            <text x="220" y="262" font-size="7.5" fill="#5a7a90" text-anchor="middle"
+                  font-family="sans-serif" font-style="italic">← G.226–247 서쪽 날개</text>
+            <text x="600" y="97"  font-size="7.5" fill="#5a7a90" text-anchor="middle"
+                  font-family="sans-serif" font-style="italic">G.248–274 동쪽 날개 →</text>
+
+            <!-- Legend (3F) -->
+            <rect x="624" y="10" width="200" height="48" rx="5"
+                  fill="rgba(255,255,255,0.93)" stroke="#d1d5db" stroke-width="1"/>
+            <circle cx="635" cy="25"  r="4.5" fill="#3b82f6"/>
+            <text   x="643" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">일식 (무코쿠)</text>
+            <circle cx="635" cy="42"  r="4.5" fill="#10b981"/>
+            <text   x="643" y="46"   font-size="7.5" fill="#374151" font-family="sans-serif">카페 (던킨·리나스)</text>
+            <text   x="635" y="57"   font-size="6.5" fill="#9ca3af" font-family="sans-serif">3층 면세/일반구역 약도</text>
+          </svg>
+        </div>
+
+        <div class="map-note" id="map-note-4f">※ 4층 면세구역 (출국심사 후 탑승구 구역) — 실제 터미널 평면도를 단순화한 약도</div>
+        <div class="map-note" id="map-note-3f" style="display:none">※ 3층 면세구역 개별 매장 + 일반구역 (탑승권 불필요) — 실제 터미널 평면도를 단순화한 약도</div>
       </div>
     </div>
 
@@ -1356,6 +1534,93 @@
     </div>
   </div>
 
+</div>
+
+<!-- TIMETABLE MODAL -->
+<div class="modal-overlay" id="timetable-modal" onclick="closeTimetableModal(event)">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">📅 6/26(목) 출발 일정</div>
+        <div style="font-size:0.72rem;color:var(--gray-500);margin-top:3px;">몽골 올란바타르행 — 26명 단체</div>
+      </div>
+      <button class="modal-close" onclick="closeTimetableBtn()">✕</button>
+    </div>
+    <div class="modal-body">
+
+      <div class="timeline-item highlight">
+        <div class="timeline-time">3:40 ~ 4:00</div>
+        <div class="timeline-content">
+          <div class="timeline-main">🏛️ 자양교회 앞 집결 및 수하물 싣기</div>
+          <div class="timeline-note">26명 수하물 적재</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">4:00 ~ 5:00</div>
+        <div class="timeline-content">
+          <div class="timeline-main">🚌 인천공항 제2여객터미널로 이동</div>
+          <div class="timeline-note">약 1시간 소요 · 서울특별시 광진구 자양빈영로 90 출발</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">5:00 ~ 5:15</div>
+        <div class="timeline-content">
+          <div class="timeline-main">✈️ T2 3층(출발층) 대한항공 카운터 앞 하차</div>
+          <div class="timeline-note">2~3번 게이트 앞 · 짐 내리기 · 인천광역시 중구 제2터미널대로 446</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">5:15 ~ 5:30</div>
+        <div class="timeline-content">
+          <div class="timeline-main">📸 체크인 카운터(B, C 구역) 앞 대기</div>
+          <div class="timeline-note">단체사진 촬영 · 화장실 이용</div>
+        </div>
+      </div>
+
+      <div class="timeline-item highlight">
+        <div class="timeline-time">5:30 ~</div>
+        <div class="timeline-content">
+          <div class="timeline-main">🎫 탑승수속 및 수하물 위탁</div>
+          <div class="timeline-note">* 대한항공 카운터 오픈 시간: 오전 5시 30분</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">6:20 ~</div>
+        <div class="timeline-content">
+          <div class="timeline-main">🛃 보안검색 및 출국심사</div>
+          <div class="timeline-note">공항 실시간 혼잡도 사전 확인 권장</div>
+        </div>
+      </div>
+
+      <div class="timeline-item highlight">
+        <div class="timeline-time">7:00 ~</div>
+        <div class="timeline-content">
+          <div class="timeline-main">🍽️ 아침식사 및 자유시간</div>
+          <div class="timeline-note">화장실 이용 등 — 면세구역 식당 이용</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">7:45 ~</div>
+        <div class="timeline-content">
+          <div class="timeline-main">🚪 탑승 게이트 앞 집결 · 비행기 탑승 시작</div>
+        </div>
+      </div>
+
+      <div class="timeline-item depart">
+        <div class="timeline-time">8:35</div>
+        <div class="timeline-content">
+          <div class="timeline-main">✈️ 울란바타르행 비행기 이륙</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <!-- BOTTOM TAB BAR -->
@@ -1703,8 +1968,8 @@ document.addEventListener('touchend', e => {
 
   // Only horizontal swipe
   if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
-  // Don't swipe inside filter chips or horizontal scroll areas
-  if (e.target.closest('.filter-row') || e.target.closest('.modal-sheet')) return;
+  // Don't swipe inside filter chips, map scroll, or modals
+  if (e.target.closest('.filter-row') || e.target.closest('.modal-sheet') || e.target.closest('.map-scroll-container')) return;
 
   const activeScreen = document.querySelector('.tab-screen.active');
   if (!activeScreen) return;
@@ -1721,6 +1986,29 @@ document.addEventListener('touchend', e => {
     switchTab(nextName, nextBtn);
   }
 }, { passive: true });
+
+// ===== FLOOR TOGGLE =====
+function setFloor(floor, btn) {
+  document.querySelectorAll('.floor-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const is4f = floor === '4f';
+  document.getElementById('map-4f').style.display = is4f ? 'block' : 'none';
+  document.getElementById('map-3f').style.display = is4f ? 'none' : 'block';
+  document.getElementById('map-note-4f').style.display = is4f ? 'block' : 'none';
+  document.getElementById('map-note-3f').style.display = is4f ? 'none' : 'block';
+}
+
+// ===== TIMETABLE =====
+function openTimetable() {
+  document.getElementById('timetable-modal').classList.add('open');
+}
+function closeTimetableModal(e) {
+  if (e.target === document.getElementById('timetable-modal'))
+    document.getElementById('timetable-modal').classList.remove('open');
+}
+function closeTimetableBtn() {
+  document.getElementById('timetable-modal').classList.remove('open');
+}
 
 // ===== RUN =====
 init();
