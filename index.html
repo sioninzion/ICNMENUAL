@@ -390,13 +390,17 @@
     .seat-cell.seat-empty::after { background: #a0a0a0; }
     .seat-cell.occupied {
       font-weight: 700;
-      color: white;
+      background: white;
+      border-color: var(--gray-400);
+      color: var(--gray-800);
     }
-    .seat-cell.occupied::after { background: rgba(0,0,0,0.15); }
-    .seat-cell.occ-임원   { background: #7c3aed; border-color: #6d28d9; color: #fbcfe8; }
-    .seat-cell.occ-공연팀  { background: var(--blue-mid); border-color: var(--blue); }
-    .seat-cell.occ-청소년  { background: #10b981; border-color: #059669; }
-    .seat-cell.occ-어린이  { background: #f59e0b; border-color: #d97706; }
+    .seat-cell.occupied::after { background: var(--gray-200); }
+    .seat-cell.occ-임원 {
+      background: #fbcfe8;
+      border-color: #f472b6;
+      color: #9d174d;
+    }
+    .seat-cell.occ-임원::after { background: #f9a8d4; }
     .seat-section-sep {
       display: flex;
       align-items: center;
@@ -1828,10 +1832,8 @@
     </div>
 
     <div class="seat-legend">
-      <div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div>임원</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div>공연팀</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>청소년</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>어린이</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#fbcfe8;border:1px solid #f472b6"></div>임원 / 목사님</div>
+      <div class="legend-item"><div class="legend-dot" style="background:white;border:1.5px solid #9ca3af"></div>단체 팀원</div>
       <div class="legend-item"><div class="legend-dot" style="background:#c5c5c5;border:1px solid #a0a0a0"></div>빈좌석(✕)</div>
     </div>
 
