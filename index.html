@@ -1038,7 +1038,7 @@
 </section>
 
 <!-- ALERT BANNER -->
-<div class="alert-banner">
+<div class="alert-banner" id="alert-banner">
   <div class="alert-icon">⏰</div>
   <div>
     <div class="alert-title">권장 식사 시간 안내</div>
@@ -1048,11 +1048,6 @@
       <span style="opacity:0.85">※ 보안검색 및 출국심사 소요시간(약 30~60분) 고려</span>
     </div>
   </div>
-</div>
-
-<!-- DISCLAIMER -->
-<div class="disclaimer-bar">
-  ⚠️ 본 자료는 2025년 기준 정보입니다. 영업시간·메뉴는 변동될 수 있으니 방문 전 확인 권장 (☎ 1577-2600)
 </div>
 
 <!-- TAB SCREENS -->
@@ -1601,6 +1596,9 @@
         현장 상황에 따라 운영시간 및 메뉴가 변동될 수 있으니, 방문 전 전화 확인을 권장합니다.
       </div>
     </div>
+    <div class="disclaimer-bar" style="margin: 8px 16px 12px;">
+      ⚠️ 본 자료는 2025년 기준 정보입니다. 영업시간·메뉴는 변동될 수 있으니 방문 전 확인 권장 (☎ 1577-2600)
+    </div>
   </div>
 
   <!-- SCREEN 5: 연락처 -->
@@ -1969,6 +1967,8 @@ function switchTab(name, btn) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('screen-' + name).classList.add('active');
   btn.classList.add('active');
+  const ab = document.getElementById('alert-banner');
+  if (ab) ab.style.display = (name === 'map' || name === 'list') ? 'flex' : 'none';
 }
 
 // ===== ZONE FILTER =====
