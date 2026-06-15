@@ -196,7 +196,7 @@
       background: var(--white);
       border-top: 1px solid var(--gray-200);
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       z-index: 200;
       padding-bottom: env(safe-area-inset-bottom);
       box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
@@ -216,8 +216,8 @@
       -webkit-tap-highlight-color: transparent;
     }
     .tab-btn.active { color: var(--blue-mid); }
-    .tab-btn .tab-icon { font-size: 1.3rem; line-height: 1; }
-    .tab-btn .tab-label { font-size: 0.62rem; font-weight: 600; white-space: nowrap; }
+    .tab-btn .tab-icon { font-size: 1.2rem; line-height: 1; }
+    .tab-btn .tab-label { font-size: 0.58rem; font-weight: 600; white-space: nowrap; }
     .tab-btn.active .tab-icon { transform: scale(1.1); }
 
     /* ===== SECTION HEADERS ===== */
@@ -910,6 +910,75 @@
       font-size: 0.85rem;
     }
     .empty-state .empty-icon { font-size: 2rem; margin-bottom: 8px; }
+
+    /* ===== CONTACT LIST ===== */
+    .contact-section { padding: 0 16px; }
+    .contact-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      box-shadow: var(--shadow);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .contact-info { flex: 1; min-width: 0; }
+    .contact-name-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+    .contact-name { font-size: 0.95rem; font-weight: 700; color: var(--gray-800); }
+    .team-badge {
+      font-size: 0.6rem; font-weight: 700;
+      padding: 2px 6px; border-radius: 4px;
+    }
+    .team-badge.임원   { background: #fdf4ff; color: #7c3aed; }
+    .team-badge.공연팀 { background: var(--blue-light); color: var(--blue-mid); }
+    .team-badge.청소년 { background: var(--green-light); color: #065f46; }
+    .team-badge.어린이 { background: #fff7ed; color: #c2410c; }
+    .role-badge {
+      font-size: 0.58rem; font-weight: 600;
+      padding: 2px 6px; border-radius: 4px;
+      background: var(--gray-100); color: var(--gray-500);
+    }
+    .role-badge.팀장   { background: var(--orange-light); color: #92400e; }
+    .role-badge.부팀장 { background: var(--blue-light); color: var(--blue-mid); }
+    .role-badge.목사님 { background: #fdf4ff; color: #7c3aed; }
+    .role-badge.회계, .role-badge.서기, .role-badge.부서기 { background: var(--green-light); color: #065f46; }
+    .contact-phone {
+      font-size: 0.85rem; font-weight: 600;
+      color: var(--gray-600); letter-spacing: 0.03em;
+    }
+    .contact-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .call-btn, .copy-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: opacity 0.15s;
+    }
+    .call-btn  { background: var(--green); color: white; }
+    .call-btn:active  { opacity: 0.8; }
+    .copy-btn  { background: var(--gray-100); color: var(--gray-600); }
+    .copy-btn:active  { background: var(--gray-200); }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: calc(var(--tab-height) + 16px);
+      left: 50%; transform: translateX(-50%) translateY(12px);
+      background: var(--gray-800); color: white;
+      font-size: 0.78rem; font-weight: 600;
+      padding: 8px 18px; border-radius: 20px;
+      opacity: 0; transition: all 0.22s ease;
+      pointer-events: none; white-space: nowrap; z-index: 500;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
@@ -1534,7 +1603,27 @@
     </div>
   </div>
 
+  <!-- SCREEN 5: 연락처 -->
+  <div class="tab-screen" id="screen-contact">
+    <div class="section-header">
+      <div class="section-icon">📞</div>
+      <h2>단체 연락처 <span style="font-size:0.72rem;font-weight:500;color:var(--gray-400);">27명</span></h2>
+    </div>
+
+    <div class="filter-row" id="contact-filter-chips">
+      <button class="chip active" data-team="all"  onclick="filterContact('all', this)">전체</button>
+      <button class="chip" data-team="임원"         onclick="filterContact('임원', this)">👑 임원</button>
+      <button class="chip" data-team="공연팀"       onclick="filterContact('공연팀', this)">🎭 공연팀</button>
+      <button class="chip" data-team="청소년"       onclick="filterContact('청소년', this)">🧑 청소년</button>
+      <button class="chip" data-team="어린이"       onclick="filterContact('어린이', this)">🧒 어린이</button>
+    </div>
+
+    <div class="contact-section" id="contact-list"></div>
+  </div>
+
 </div>
+
+<div class="toast" id="toast"></div>
 
 <!-- TIMETABLE MODAL -->
 <div class="modal-overlay" id="timetable-modal" onclick="closeTimetableModal(event)">
@@ -1627,19 +1716,23 @@
 <nav class="bottom-tabs">
   <button class="tab-btn active" onclick="switchTab('map', this)">
     <span class="tab-icon">🗺️</span>
-    <span class="tab-label">위치 안내</span>
+    <span class="tab-label">위치</span>
   </button>
   <button class="tab-btn" onclick="switchTab('list', this)">
     <span class="tab-icon">📋</span>
-    <span class="tab-label">식당 리스트</span>
+    <span class="tab-label">식당</span>
   </button>
   <button class="tab-btn" onclick="switchTab('rec', this)">
     <span class="tab-icon">🏆</span>
-    <span class="tab-label">단체 추천</span>
+    <span class="tab-label">추천</span>
   </button>
   <button class="tab-btn" onclick="switchTab('note', this)">
     <span class="tab-icon">📌</span>
-    <span class="tab-label">참고사항</span>
+    <span class="tab-label">참고</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('contact', this)">
+    <span class="tab-icon">📞</span>
+    <span class="tab-label">연락처</span>
   </button>
 </nav>
 
@@ -1659,6 +1752,37 @@
 </div>
 
 <script>
+// ===== CONTACT DATA =====
+const CONTACTS = [
+  { name: '곽도영',  team: '공연팀', role: '팀원',  phone: '010-9596-5396' },
+  { name: '권오준',  team: '청소년', role: '팀원',  phone: '010-5514-9715' },
+  { name: '김범서',  team: '청소년', role: '팀원',  phone: '010-4577-2877' },
+  { name: '김승민',  team: '공연팀', role: '팀원',  phone: '010-4496-3388' },
+  { name: '김영진',  team: '청소년', role: '팀원',  phone: '010-9774-8757' },
+  { name: '김완재',  team: '공연팀', role: '팀원',  phone: '010-9611-0577' },
+  { name: '김용빈',  team: '청소년', role: '팀원',  phone: '010-8556-0882' },
+  { name: '김우림',  team: '어린이', role: '팀원',  phone: '010-6401-9455' },
+  { name: '김지원06',team: '청소년', role: '팀장',  phone: '010-2006-8923' },
+  { name: '김지원07',team: '어린이', role: '팀원',  phone: '010-6552-3591' },
+  { name: '김지은',  team: '임원',   role: '회계',  phone: '010-2008-0254' },
+  { name: '남시은',  team: '공연팀', role: '팀원',  phone: '010-4678-4059' },
+  { name: '노시온',  team: '어린이', role: '팀장',  phone: '010-3747-6375' },
+  { name: '우성원',  team: '어린이', role: '팀원',  phone: '010-9876-5506' },
+  { name: '유희원',  team: '어린이', role: '부팀장', phone: '010-5193-3858' },
+  { name: '이예슬',  team: '어린이', role: '팀원',  phone: '010-9331-1945' },
+  { name: '이예진',  team: '임원',   role: '팀장',  phone: '010-5140-6829' },
+  { name: '이예현',  team: '청소년', role: '부팀장', phone: '010-7602-1945' },
+  { name: '이우주',  team: '임원',   role: '부서기', phone: '010-8714-8440' },
+  { name: '이찬미',  team: '임원',   role: '서기',  phone: '010-5790-0744' },
+  { name: '이형준',  team: '공연팀', role: '팀원',  phone: '010-3023-1762' },
+  { name: '최예담',  team: '어린이', role: '팀원',  phone: '010-5766-9692' },
+  { name: '최원석',  team: '임원',   role: '목사님', phone: '010-5192-1193' },
+  { name: '최정현',  team: '공연팀', role: '부팀장', phone: '010-6524-2147' },
+  { name: '한수호',  team: '청소년', role: '팀원',  phone: '010-3544-4551' },
+  { name: '한예진',  team: '임원',   role: '부팀장', phone: '010-2558-9744' },
+  { name: '함유빈',  team: '공연팀', role: '팀장',  phone: '010-3933-4357' },
+];
+
 // ===== DATA =====
 const RESTAURANTS = [
   // DUTY-FREE ZONE
@@ -1826,10 +1950,12 @@ const CAT_ICONS = {
 // ===== STATE =====
 let currentZone = 'duty';
 let currentCat = 'all';
+let currentContactTeam = 'all';
 
 // ===== INIT =====
 function init() {
   renderRestaurants();
+  renderContacts();
 }
 
 // ===== TABS =====
@@ -1955,7 +2081,7 @@ function closeModalBtn() {
 // ===== TOUCH SWIPE (between tabs) =====
 let touchStartX = 0;
 let touchStartY = 0;
-const tabOrder = ['map', 'list', 'rec', 'note'];
+const tabOrder = ['map', 'list', 'rec', 'note', 'contact'];
 
 document.addEventListener('touchstart', e => {
   touchStartX = e.touches[0].clientX;
@@ -1986,6 +2112,61 @@ document.addEventListener('touchend', e => {
     switchTab(nextName, nextBtn);
   }
 }, { passive: true });
+
+// ===== CONTACT =====
+function filterContact(team, btn) {
+  currentContactTeam = team;
+  document.querySelectorAll('#contact-filter-chips .chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  renderContacts();
+}
+
+function renderContacts() {
+  const list = document.getElementById('contact-list');
+  if (!list) return;
+  const filtered = currentContactTeam === 'all'
+    ? CONTACTS
+    : CONTACTS.filter(c => c.team === currentContactTeam);
+
+  list.innerHTML = filtered.map(c => `
+    <div class="contact-card">
+      <div class="contact-info">
+        <div class="contact-name-row">
+          <span class="contact-name">${c.name}</span>
+          <span class="team-badge ${c.team}">${c.team}</span>
+          <span class="role-badge ${c.role}">${c.role}</span>
+        </div>
+        <div class="contact-phone">${c.phone}</div>
+      </div>
+      <div class="contact-actions">
+        <a href="tel:${c.phone.replace(/-/g,'')}" class="call-btn" title="전화">📞</a>
+        <button class="copy-btn" onclick="copyPhone('${c.phone}')" title="번호 복사">📋</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function copyPhone(phone) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(phone).then(() => showToast('📋 ' + phone + ' 복사됨'));
+  } else {
+    const el = document.createElement('input');
+    el.value = phone;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    showToast('📋 ' + phone + ' 복사됨');
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2200);
+}
 
 // ===== FLOOR TOGGLE =====
 function setFloor(floor, btn) {
