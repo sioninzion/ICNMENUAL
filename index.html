@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>인천공항 T2 새벽 식당 가이드</title>
-  <meta name="description" content="인천공항 제2여객터미널 새벽 이용 가능 식당 가이드 - 6/26(목) 몽골 올란바타르 출국 26명 단체">
+  <title>인천공항 T2 새벽 출국 안내</title>
+  <meta name="description" content="인천공항 제2여객터미널 새벽 이용 가능 시설 안내 - 6/26(목) 몽골 올란바타르 출국 26명 단체">
   <meta name="theme-color" content="#1a3a8f">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -532,15 +532,6 @@
       font-size: 1rem;
       flex-shrink: 0;
     }
-    .cat-한식 { background: #fef3f2; }
-    .cat-돈카츠 { background: #fff7ed; }
-    .cat-태국식 { background: #f0fdf4; }
-    .cat-분식 { background: #fdf4ff; }
-    .cat-일식 { background: #eff6ff; }
-    .cat-카페 { background: #f5f3ff; }
-    .cat-양식 { background: #fff1f2; }
-    .cat-패스트푸드 { background: #fef9c3; }
-    .cat-베이커리  { background: #fdf2f8; }
     .cat-라운지   { background: #eef2ff; }
     .cat-면세점   { background: #fdf4ff; }
     .cat-편의시설  { background: #f0fdf4; }
@@ -1152,15 +1143,9 @@
       border-radius: 5px;
       display: inline-block;
     }
-    .cat-label.한식 { background: #fef3f2; color: #b91c1c; }
-    .cat-label.돈카츠 { background: #fff7ed; color: #c2410c; }
-    .cat-label.태국식 { background: #f0fdf4; color: #166534; }
-    .cat-label.분식 { background: #fdf4ff; color: #6d28d9; }
-    .cat-label.일식 { background: #eff6ff; color: #1d4ed8; }
-    .cat-label.카페 { background: #f5f3ff; color: #5b21b6; }
-    .cat-label.양식 { background: #fff1f2; color: #be123c; }
-    .cat-label.패스트푸드 { background: #fef9c3; color: #a16207; }
-    .cat-label.베이커리 { background: #fdf2f8; color: #be185d; }
+    .cat-label.라운지 { background: #eef2ff; color: #3730a3; }
+    .cat-label.면세점 { background: #fdf4ff; color: #6d28d9; }
+    .cat-label.편의시설 { background: #f0fdf4; color: #166534; }
 
     .disclaimer-bar {
       margin: 8px 16px 0;
@@ -1261,7 +1246,7 @@
     <span>인천공항 제2여객터미널</span>
   </div>
   <div class="top-bar-date">
-    <div>새벽 식당 가이드</div>
+    <div>새벽 출국 안내</div>
     <div>2025년 기준 정보</div>
   </div>
 </header>
@@ -1269,13 +1254,13 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-badge">
-    🍽️ 새벽 이용 가능 식당 가이드
+    ✈️ 새벽 이용 가능 시설 안내
   </div>
   <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:4px;">
-    <h1 style="margin-bottom:0;">새벽 이용 가능<br>식당 가이드</h1>
+    <h1 style="margin-bottom:0;">새벽 이용 가능<br>시설 안내</h1>
     <button class="timetable-btn" onclick="openTimetable()">📅 일정표</button>
   </div>
-  <p class="hero-sub">6/26(목) 몽골 올란바타르 출국 단체 식사 안내</p>
+  <p class="hero-sub">6/26(목) 몽골 올란바타르 출국 단체 안내</p>
   <div class="flight-grid">
     <div class="flight-card">
       <div class="flight-card-icon">✈️</div>
@@ -1370,7 +1355,7 @@
           <div class="move-step-num">5</div>
           <div class="move-step-body">
             <div class="move-step-title">면세구역 입장 · 자유시간</div>
-            <div class="move-step-sub">3·4층 면세구역 — 카페·면세점 이용 (스타벅스 등 24시간)</div>
+            <div class="move-step-sub">3·4층 면세구역 — 라운지·면세품 인도장·화장실 이용</div>
           </div>
           <div class="move-step-time">7:00~</div>
         </div>
@@ -1438,18 +1423,16 @@
             <line x1="706" y1="118" x2="706" y2="96"  stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
             <line x1="734" y1="145" x2="734" y2="167" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
 
-            <!-- Restaurant stubs: 4F colored, 3F positions shown gray -->
-            <line x1="92"  y1="204" x2="87"  y2="183" stroke="#ef4444" stroke-width="9" stroke-linecap="round"/>
-            <line x1="149" y1="190" x2="144" y2="169" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
-            <!-- G234 = 3층 무코쿠 → gray on 4F view -->
+            <!-- All gate stubs gray -->
+            <line x1="92"  y1="204" x2="87"  y2="183" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="149" y1="190" x2="144" y2="169" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
             <line x1="193" y1="180" x2="188" y2="159" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
-            <line x1="414" y1="157" x2="414" y2="179" stroke="#f59e0b" stroke-width="10" stroke-linecap="round"/>
-            <line x1="456" y1="129" x2="456" y2="107" stroke="#ef4444" stroke-width="9" stroke-linecap="round"/>
-            <!-- G253 = 3층 던킨, G266 = 3층 리나스 → gray on 4F view -->
+            <line x1="414" y1="157" x2="414" y2="179" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="456" y1="129" x2="456" y2="107" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
             <line x1="470" y1="129" x2="470" y2="107" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
             <line x1="651" y1="146" x2="651" y2="168" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
-            <line x1="678" y1="119" x2="678" y2="97"  stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
-            <line x1="761" y1="141" x2="761" y2="163" stroke="#ef4444" stroke-width="9" stroke-linecap="round"/>
+            <line x1="678" y1="119" x2="678" y2="97"  stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="761" y1="141" x2="761" y2="163" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
 
             <!-- ===== TERMINAL BODY (concourse silhouette) ===== -->
             <!--  Left arm  centerline: (80,220)→(400,145)  corridor half-width=13
@@ -1473,63 +1456,74 @@
             <text x="21" y="214" font-size="6" fill="#2d6080" text-anchor="middle"
                   font-family="sans-serif">(일반구역)</text>
 
-            <!-- 3F note callout -->
+            <!-- 3F facilities note callout -->
             <rect x="2" y="8" width="128" height="36" rx="5"
                   fill="rgba(239,246,255,0.95)" stroke="#93c5fd" stroke-width="1.5"/>
             <text x="66" y="23" font-size="7" fill="#1e3a8a" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700">* 3층 매장(무코쿠·던킨·리나스)</text>
+                  font-family="sans-serif" font-weight="700">3층 시설 (화장실·라운지 등)</text>
             <text x="66" y="37" font-size="7" fill="#1d4ed8" text-anchor="middle"
                   font-family="sans-serif">→ [3층] 버튼에서 확인</text>
 
-            <!-- ===== RESTAURANT MARKERS ===== -->
+            <!-- ===== FACILITY MARKERS (4F) ===== -->
 
-            <!-- 소갈보올 (G227 above-left) -->
-            <circle cx="87" cy="183" r="5.5" fill="#ef4444" stroke="white" stroke-width="1.5"/>
-            <text x="87"  y="172" font-size="7.5" fill="#7f1d1d" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">소갈보올</text>
+            <!-- 스카이허브 라운지 동편 (east end) -->
+            <rect x="780" y="155" width="45" height="28" rx="4"
+                  fill="rgba(238,242,255,0.97)" stroke="#818cf8" stroke-width="1.2"/>
+            <text x="803" y="166" font-size="6.5" fill="#3730a3" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700">🛋️ 라운지</text>
+            <text x="803" y="177" font-size="5.5" fill="#4338ca" text-anchor="middle"
+                  font-family="sans-serif">스카이허브(동)</text>
 
-            <!-- 투썸플레이스 (G231 above-left) -->
-            <circle cx="144" cy="169" r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
-            <text x="144" y="158" font-size="7.5" fill="#065f46" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">투썸플레이스</text>
+            <!-- 마티나 라운지 (near G252) -->
+            <rect x="426" y="108" width="42" height="24" rx="4"
+                  fill="rgba(238,242,255,0.97)" stroke="#818cf8" stroke-width="1.2"/>
+            <text x="447" y="118" font-size="6.5" fill="#3730a3" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700">🛋️ 마티나</text>
+            <text x="447" y="128" font-size="5.5" fill="#4338ca" text-anchor="middle"
+                  font-family="sans-serif">G.252 부근</text>
 
-            <!-- 플레잉 푸드코트 cluster callout (G249 below-right) -->
-            <rect x="355" y="182" width="118" height="72" rx="5"
-                  fill="rgba(255,247,205,0.97)" stroke="#f59e0b" stroke-width="1.5"/>
-            <circle cx="414" cy="179" r="6.5" fill="#f59e0b" stroke="white" stroke-width="2"/>
-            <text x="414" y="196" font-size="7.5" fill="#92400e" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700">🍽 플레잉 푸드코트</text>
-            <text x="414" y="208" font-size="6.5" fill="#b45309" text-anchor="middle"
-                  font-family="sans-serif">효자공담 · 호호가츠</text>
-            <text x="414" y="219" font-size="6.5" fill="#b45309" text-anchor="middle"
-                  font-family="sans-serif">소달반상 · 콘타이</text>
-            <text x="414" y="230" font-size="6.5" fill="#b45309" text-anchor="middle"
-                  font-family="sans-serif">택싱5 · 스타벅스</text>
-            <text x="414" y="243" font-size="6"   fill="#78350f" text-anchor="middle"
-                  font-family="sans-serif">249번 게이트 · 4층 면세구역</text>
+            <!-- 온라인 면세품 인도장 (near G252, below) -->
+            <rect x="380" y="183" width="66" height="28" rx="4"
+                  fill="rgba(253,244,255,0.97)" stroke="#c084fc" stroke-width="1.2"/>
+            <text x="413" y="194" font-size="6.5" fill="#581c87" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700">🛍️ 면세품 인도장</text>
+            <text x="413" y="205" font-size="5.5" fill="#7e22ce" text-anchor="middle"
+                  font-family="sans-serif">G.252 맞은편 · 24시간</text>
 
-            <!-- 옥수고집 (G252 above-right) -->
-            <circle cx="456" cy="107" r="5.5" fill="#ef4444" stroke="white" stroke-width="1.5"/>
-            <text x="456" y="96"  font-size="7.5" fill="#7f1d1d" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">옥수고집</text>
+            <!-- 화장실 markers (4F — G232·G241·G248·G257·G268 부근) -->
 
-            <!-- 파스쿠찌 (G268 above-right) -->
-            <circle cx="678" cy="97"  r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
-            <text x="678" y="86"  font-size="7.5" fill="#065f46" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">파스쿠찌</text>
+            <!-- G232 above left arm (수유실·흡연실 cluster) -->
+            <text x="158" y="163" font-size="11" text-anchor="middle" font-family="sans-serif">🚻</text>
+            <text x="158" y="157" font-size="5.5" fill="#1e40af" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">화장실</text>
+            <text x="158" y="178" font-size="6" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.232</text>
 
-            <!-- 자연담은한상 (G274 below-right) -->
-            <circle cx="761" cy="163" r="5.5" fill="#ef4444" stroke="white" stroke-width="1.5"/>
-            <text x="761" y="178" font-size="7.5" fill="#7f1d1d" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">자연담은한상</text>
+            <!-- G241 below left arm -->
+            <text x="288" y="196" font-size="11" text-anchor="middle" font-family="sans-serif">🚻</text>
+            <text x="288" y="208" font-size="5.5" fill="#1e40af" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">화장실</text>
+            <text x="288" y="220" font-size="6" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.241</text>
 
-            <!-- Gate labels (4F restaurants) -->
-            <text x="87"  y="260" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.227</text>
-            <text x="150" y="164" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.231</text>
-            <text x="414" y="173" font-size="7" fill="#b45309" text-anchor="middle" font-family="sans-serif" font-weight="700">G.249</text>
-            <text x="456" y="120" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.252</text>
-            <text x="678" y="110" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.268</text>
-            <text x="761" y="156" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.274</text>
+            <!-- G248 above right arm (junction) -->
+            <text x="400" y="108" font-size="11" text-anchor="middle" font-family="sans-serif">🚻</text>
+            <text x="400" y="102" font-size="5.5" fill="#1e40af" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">화장실</text>
+            <text x="400" y="122" font-size="6" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.248</text>
+
+            <!-- G257 below right arm (수유실 cluster) -->
+            <text x="526" y="165" font-size="11" text-anchor="middle" font-family="sans-serif">🚻</text>
+            <text x="526" y="177" font-size="5.5" fill="#1e40af" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">화장실</text>
+            <text x="526" y="188" font-size="6" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.257</text>
+
+            <!-- G268 above right arm (수유실 cluster) -->
+            <text x="678" y="92" font-size="11" text-anchor="middle" font-family="sans-serif">🚻</text>
+            <text x="678" y="86" font-size="5.5" fill="#1e40af" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl4)">화장실</text>
+            <text x="678" y="106" font-size="6" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.268</text>
+
+            <!-- Reference gate labels -->
+            <text x="456" y="135" font-size="6" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.252</text>
 
             <!-- Wing range labels -->
             <text x="220" y="262" font-size="7.5" fill="#5a7a90" text-anchor="middle"
@@ -1538,15 +1532,13 @@
                   font-family="sans-serif" font-style="italic">G.248–274 동쪽 날개 →</text>
 
             <!-- Legend (4F) -->
-            <rect x="624" y="10" width="200" height="48" rx="5"
+            <rect x="2" y="230" width="150" height="36" rx="5"
                   fill="rgba(255,255,255,0.93)" stroke="#d1d5db" stroke-width="1"/>
-            <circle cx="635" cy="25"  r="4.5" fill="#ef4444"/>
-            <text   x="643" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">한식</text>
-            <circle cx="672" cy="25"  r="4.5" fill="#10b981"/>
-            <text   x="680" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">카페</text>
-            <circle cx="710" cy="25"  r="4.5" fill="#f59e0b"/>
-            <text   x="718" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">푸드코트</text>
-            <text   x="635" y="50"   font-size="6.5" fill="#9ca3af" font-family="sans-serif">4층 면세구역 · 탑승구 기준 약도</text>
+            <text x="8"  y="243" font-size="9" font-family="sans-serif">🚻</text>
+            <text x="20" y="244" font-size="7" fill="#374151" font-family="sans-serif">화장실 (24시간)</text>
+            <text x="8"  y="260" font-size="9" font-family="sans-serif">🛋️</text>
+            <text x="20" y="261" font-size="7" fill="#374151" font-family="sans-serif">라운지</text>
+            <text x="624" y="14" font-size="6.5" fill="#9ca3af" font-family="sans-serif">4층 면세구역 · 탑승구 기준 약도</text>
           </svg>
         </div>
 
@@ -1593,10 +1585,10 @@
             <line x1="678" y1="119" x2="678" y2="97"  stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
             <line x1="761" y1="141" x2="761" y2="163" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
 
-            <!-- 3F restaurant stubs (colored) -->
-            <line x1="193" y1="180" x2="188" y2="159" stroke="#3b82f6" stroke-width="9" stroke-linecap="round"/>
-            <line x1="470" y1="129" x2="470" y2="107" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
-            <line x1="651" y1="146" x2="651" y2="168" stroke="#10b981" stroke-width="9" stroke-linecap="round"/>
+            <!-- 3F all stubs gray -->
+            <line x1="193" y1="180" x2="188" y2="159" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="470" y1="129" x2="470" y2="107" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
+            <line x1="651" y1="146" x2="651" y2="168" stroke="#96b4ca" stroke-width="7" stroke-linecap="round"/>
 
             <!-- Terminal body -->
             <path d="M 77,207 C 196,176 312,154 397,132
@@ -1616,38 +1608,69 @@
                   font-family="sans-serif">(일반구역)</text>
 
             <!-- 일반구역 3층 callout -->
-            <rect x="2" y="8" width="126" height="56" rx="5"
+            <rect x="2" y="8" width="126" height="46" rx="5"
                   fill="rgba(209,250,229,0.97)" stroke="#34d399" stroke-width="1.5"/>
             <text x="65" y="23" font-size="7.5" fill="#065f46" text-anchor="middle"
                   font-family="sans-serif" font-weight="700">🏬 일반구역 3층</text>
             <text x="65" y="35" font-size="7"   fill="#047857" text-anchor="middle"
-                  font-family="sans-serif">쉐이크쉑 · 롯데리아</text>
-            <text x="65" y="47" font-size="7"   fill="#047857" text-anchor="middle"
-                  font-family="sans-serif">파리바게뜨</text>
-            <text x="65" y="57" font-size="6"   fill="#6b7280" text-anchor="middle"
+                  font-family="sans-serif">환전소 · 화장실</text>
+            <text x="65" y="47" font-size="6"   fill="#6b7280" text-anchor="middle"
                   font-family="sans-serif">(탑승권 불필요)</text>
 
-            <!-- 무코쿠 G234 -->
-            <circle cx="188" cy="159" r="5.5" fill="#3b82f6" stroke="white" stroke-width="1.5"/>
-            <text x="188" y="148" font-size="7.5" fill="#1e3a8a" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl3)">무코쿠</text>
-            <text x="188" y="138" font-size="6.5" fill="#1d4ed8" text-anchor="middle"
-                  font-family="sans-serif" filter="url(#lbl3)">(3층)</text>
+            <!-- 화장실 markers (3F — G232·G243·G248·G253·G265 부근) -->
 
-            <!-- 던킨 G253 -->
-            <circle cx="470" cy="107" r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
-            <text x="472" y="84"  font-size="7"   fill="#065f46" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl3)">던킨(3층)</text>
+            <!-- G232 above left arm -->
+            <text x="158" y="164" font-size="11" text-anchor="middle" font-family="sans-serif">🚻</text>
+            <text x="158" y="158" font-size="5.5" fill="#1e40af" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl3)">화장실</text>
+            <text x="158" y="179" font-size="6" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.232</text>
 
-            <!-- 리나스 G266 -->
-            <circle cx="651" cy="168" r="5.5" fill="#10b981" stroke="white" stroke-width="1.5"/>
-            <text x="651" y="183" font-size="7.5" fill="#065f46" text-anchor="middle"
-                  font-family="sans-serif" font-weight="700" filter="url(#lbl3)">리나스(3층)</text>
+            <!-- G243 above left arm (수유실 cluster) -->
+            <text x="302" y="130" font-size="11" text-anchor="middle" font-family="sans-serif">🚻</text>
+            <text x="302" y="124" font-size="5.5" fill="#1e40af" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl3)">화장실</text>
+            <text x="302" y="145" font-size="6" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.243</text>
 
-            <!-- Gate labels (3F) -->
-            <text x="196" y="153" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.234</text>
-            <text x="474" y="120" font-size="7" fill="#4b6478" text-anchor="start"  font-family="sans-serif">G.253</text>
-            <text x="651" y="161" font-size="7" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.266</text>
+            <!-- G248 above right arm (junction) -->
+            <text x="400" y="109" font-size="11" text-anchor="middle" font-family="sans-serif">🚻</text>
+            <text x="400" y="103" font-size="5.5" fill="#1e40af" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl3)">화장실</text>
+            <text x="400" y="123" font-size="6" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.248</text>
+
+            <!-- G253 above right arm (흡연실·수유실 cluster) -->
+            <text x="470" y="104" font-size="11" text-anchor="middle" font-family="sans-serif">🚻</text>
+            <text x="470" y="98" font-size="5.5" fill="#1e40af" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl3)">화장실</text>
+            <text x="470" y="118" font-size="6" fill="#4b6478" text-anchor="start"  font-family="sans-serif">G.253</text>
+
+            <!-- G265 below right arm east -->
+            <text x="637" y="162" font-size="11" text-anchor="middle" font-family="sans-serif">🚻</text>
+            <text x="637" y="174" font-size="5.5" fill="#1e40af" text-anchor="middle"
+                  font-family="sans-serif" font-weight="700" filter="url(#lbl3)">화장실</text>
+            <text x="637" y="185" font-size="6" fill="#4b6478" text-anchor="middle" font-family="sans-serif">G.265</text>
+
+            <!-- 흡연실 markers (3F — G231·G247·G254 부근, 공식 위치) -->
+
+            <!-- G231 below left arm (흡연실 — 전자담배 전용) -->
+            <text x="144" y="198" font-size="10" text-anchor="middle" font-family="sans-serif">🚬</text>
+            <text x="144" y="210" font-size="5.5" fill="#374151" text-anchor="middle"
+                  font-family="sans-serif" filter="url(#lbl3)">흡연실</text>
+            <text x="144" y="221" font-size="5.5" fill="#6b7280" text-anchor="middle"
+                  font-family="sans-serif" filter="url(#lbl3)">G.231</text>
+
+            <!-- G247 above left arm end -->
+            <text x="368" y="120" font-size="10" text-anchor="middle" font-family="sans-serif">🚬</text>
+            <text x="368" y="114" font-size="5.5" fill="#374151" text-anchor="middle"
+                  font-family="sans-serif" filter="url(#lbl3)">흡연실</text>
+            <text x="368" y="108" font-size="5.5" fill="#6b7280" text-anchor="middle"
+                  font-family="sans-serif" filter="url(#lbl3)">G.247</text>
+
+            <!-- G254 above right arm (shifted up to avoid G.253 overlap) -->
+            <text x="484" y="84" font-size="10" text-anchor="middle" font-family="sans-serif">🚬</text>
+            <text x="484" y="78" font-size="5.5" fill="#374151" text-anchor="middle"
+                  font-family="sans-serif" filter="url(#lbl3)">흡연실</text>
+            <text x="484" y="72" font-size="5.5" fill="#6b7280" text-anchor="middle"
+                  font-family="sans-serif" filter="url(#lbl3)">G.254</text>
 
             <!-- Wing labels -->
             <text x="220" y="262" font-size="7.5" fill="#5a7a90" text-anchor="middle"
@@ -1656,13 +1679,13 @@
                   font-family="sans-serif" font-style="italic">G.248–274 동쪽 날개 →</text>
 
             <!-- Legend (3F) -->
-            <rect x="624" y="10" width="200" height="48" rx="5"
+            <rect x="2" y="220" width="150" height="44" rx="5"
                   fill="rgba(255,255,255,0.93)" stroke="#d1d5db" stroke-width="1"/>
-            <circle cx="635" cy="25"  r="4.5" fill="#3b82f6"/>
-            <text   x="643" y="29"   font-size="7.5" fill="#374151" font-family="sans-serif">일식 (무코쿠)</text>
-            <circle cx="635" cy="42"  r="4.5" fill="#10b981"/>
-            <text   x="643" y="46"   font-size="7.5" fill="#374151" font-family="sans-serif">카페 (던킨·리나스)</text>
-            <text   x="635" y="57"   font-size="6.5" fill="#9ca3af" font-family="sans-serif">3층 면세/일반구역 약도</text>
+            <text x="8"  y="232" font-size="9" font-family="sans-serif">🚻</text>
+            <text x="20" y="233" font-size="7" fill="#374151" font-family="sans-serif">화장실 (24시간)</text>
+            <text x="8"  y="248" font-size="9" font-family="sans-serif">🚬</text>
+            <text x="20" y="249" font-size="7" fill="#374151" font-family="sans-serif">흡연실 (24시간)</text>
+            <text x="624" y="14" font-size="6.5" fill="#9ca3af" font-family="sans-serif">3층 면세/일반구역 약도</text>
           </svg>
         </div>
 
@@ -1677,31 +1700,31 @@
         <div style="font-size:1.2rem;">🛃</div>
         <div>
           <div class="zone-info-title">면세구역 (출국심사 후)</div>
-          <div class="zone-info-subtitle">4층 — 24시간 운영</div>
+          <div class="zone-info-subtitle">3·4층 — 보안검색·출국심사 통과 후 입장</div>
         </div>
         <span class="zone-req-badge required">탑승권 필요</span>
       </div>
       <div class="foodcourt-list">
         <div class="foodcourt-item">
           <div>
-            <div class="foodcourt-name">플레잉 푸드코트</div>
-            <div class="foodcourt-loc">📍 4층 248-249번 게이트 부근</div>
+            <div class="foodcourt-name">🛋️ 라운지</div>
+            <div class="foodcourt-loc">📍 4층 동편·서편 끝, 252번 게이트 부근</div>
           </div>
-          <span class="foodcourt-count">5개 매장</span>
+          <span class="foodcourt-count">4곳</span>
         </div>
         <div class="foodcourt-item">
           <div>
-            <div class="foodcourt-name">고메브릿지 푸드코트</div>
-            <div class="foodcourt-loc">📍 4층 252/253 · 274 · 227번 게이트</div>
+            <div class="foodcourt-name">🛍️ 면세품 인도장 · 면세점</div>
+            <div class="foodcourt-loc">📍 4층 252번 맞은편 (인도장 24h), 06:30 오픈</div>
           </div>
-          <span class="foodcourt-count">3개 매장</span>
+          <span class="foodcourt-count">2곳</span>
         </div>
         <div class="foodcourt-item">
           <div>
-            <div class="foodcourt-name">개별 매장 (일식·카페)</div>
-            <div class="foodcourt-loc">📍 3층 234번, 4층 각 게이트</div>
+            <div class="foodcourt-name">🚻 화장실 · 수유실 · 키즈존</div>
+            <div class="foodcourt-loc">📍 3·4층 전 구역 분산 배치 (24시간)</div>
           </div>
-          <span class="foodcourt-count">6개 매장</span>
+          <span class="foodcourt-count">다수</span>
         </div>
       </div>
     </div>
@@ -1712,53 +1735,51 @@
         <div style="font-size:1.2rem;">🏬</div>
         <div>
           <div class="zone-info-title">일반구역 (출국심사 전)</div>
-          <div class="zone-info-subtitle">3층 — 24시간 운영</div>
+          <div class="zone-info-subtitle">3층 — 탑승권 없이 이용 가능</div>
         </div>
         <span class="zone-req-badge free">탑승권 불필요</span>
       </div>
       <div class="foodcourt-list">
         <div class="foodcourt-item">
           <div>
-            <div class="foodcourt-name">쉐이크쉑 · 롯데리아 · 파리바게뜨</div>
-            <div class="foodcourt-loc">📍 3층 F·G 카운터 부근</div>
+            <div class="foodcourt-name">💱 환전소</div>
+            <div class="foodcourt-loc">📍 3층 체크인 구역 내 (일부 새벽 운영)</div>
           </div>
-          <span class="foodcourt-count">3개 매장</span>
+          <span class="foodcourt-count">다수</span>
+        </div>
+        <div class="foodcourt-item">
+          <div>
+            <div class="foodcourt-name">🚻 화장실</div>
+            <div class="foodcourt-loc">📍 3층 F·G 카운터 구역 분산</div>
+          </div>
+          <span class="foodcourt-count">다수</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- SCREEN 2: 식당·시설 리스트 -->
+  <!-- SCREEN 2: 시설 리스트 -->
   <div class="tab-screen active" id="screen-list">
     <div class="section-header">
-      <div class="section-icon">📋</div>
-      <h2>식당 · 시설</h2>
+      <div class="section-icon">🏪</div>
+      <h2>공항 시설 안내</h2>
     </div>
 
     <!-- Zone Toggle -->
     <div class="zone-toggle">
       <button class="zone-btn active" data-zone="duty" onclick="filterZone('duty', this)">
         🛃 면세구역
-        <span class="zone-badge">23곳</span>
+        <span class="zone-badge">12곳</span>
       </button>
       <button class="zone-btn" data-zone="public" onclick="filterZone('public', this)">
         🏬 일반구역
-        <span class="zone-badge">5곳</span>
+        <span class="zone-badge">3곳</span>
       </button>
     </div>
 
     <!-- Category Filter -->
     <div class="filter-row" id="filter-chips">
       <button class="chip active" data-cat="all" onclick="filterCat('all', this)">전체</button>
-      <button class="chip" data-cat="한식" onclick="filterCat('한식', this)">🍚 한식</button>
-      <button class="chip" data-cat="일식" onclick="filterCat('일식', this)">🍜 일식</button>
-      <button class="chip" data-cat="돈카츠" onclick="filterCat('돈카츠', this)">🍱 돈카츠</button>
-      <button class="chip" data-cat="태국식" onclick="filterCat('태국식', this)">🌶️ 태국식</button>
-      <button class="chip" data-cat="분식" onclick="filterCat('분식', this)">🥘 분식</button>
-      <button class="chip" data-cat="카페" onclick="filterCat('카페', this)">☕ 카페</button>
-      <button class="chip" data-cat="양식" onclick="filterCat('양식', this)">🍔 양식</button>
-      <button class="chip" data-cat="패스트푸드" onclick="filterCat('패스트푸드', this)">🍟 패스트푸드</button>
-      <button class="chip" data-cat="베이커리" onclick="filterCat('베이커리', this)">🥐 베이커리</button>
       <button class="chip" data-cat="라운지" onclick="filterCat('라운지', this)">🛋️ 라운지</button>
       <button class="chip" data-cat="면세점" onclick="filterCat('면세점', this)">🛍️ 면세점</button>
       <button class="chip" data-cat="편의시설" onclick="filterCat('편의시설', this)">🏪 편의시설</button>
@@ -1772,90 +1793,8 @@
     </div>
   </div>
 
-  <!-- SCREEN 3: 기타정보 (추천 + 참고사항 통합) -->
+  <!-- SCREEN 3: 기타정보 -->
   <div class="tab-screen" id="screen-info">
-    <div class="section-header">
-      <div class="section-icon">🏆</div>
-      <h2>26명 단체 식사 추천</h2>
-    </div>
-
-    <div class="rec-section">
-
-      <div class="rec-card">
-        <div class="rec-header">
-          <div class="rank-badge rank-1">1</div>
-          <div class="rec-info">
-            <div class="rec-name">플레잉 푸드코트</div>
-            <div class="rec-sub">4층 249번 게이트 부근 · 면세구역</div>
-          </div>
-        </div>
-        <div class="rec-body">
-          <ul class="rec-bullets">
-            <li>6개 매장 동시 운영으로 메뉴 선택 다양</li>
-            <li>넓은 좌석 — 26명 단체 수용 가능</li>
-            <li>한식(곰탕), 돈카츠, 태국식, 분식 등 취향별 선택</li>
-            <li>각자 원하는 메뉴 주문 후 함께 식사 가능</li>
-          </ul>
-          <div class="price-tag">💰 가격대: 8,500 ~ 15,000원</div>
-        </div>
-      </div>
-
-      <div class="rec-card">
-        <div class="rec-header">
-          <div class="rank-badge rank-2">2</div>
-          <div class="rec-info">
-            <div class="rec-name">고메브릿지 (274번 게이트)</div>
-            <div class="rec-sub">4층 274번 게이트 부근 · 면세구역</div>
-          </div>
-        </div>
-        <div class="rec-body">
-          <ul class="rec-bullets">
-            <li>육수고집 + 자연담은한상 24시간 운영</li>
-            <li>따뜻한 국물 한식 중심 — 새벽 식사로 적합</li>
-            <li>인천공항 선정 맛집 포함</li>
-            <li>분산 착석 가능 — 보조 분산 식사로도 활용</li>
-          </ul>
-          <div class="price-tag">💰 가격대: 11,000 ~ 16,000원</div>
-        </div>
-      </div>
-
-      <div class="rec-card">
-        <div class="rec-header">
-          <div class="rank-badge rank-3">3</div>
-          <div class="rec-info">
-            <div class="rec-name">무코쿠 (일식)</div>
-            <div class="rec-sub">3층 234번 게이트 부근 · 면세구역</div>
-          </div>
-        </div>
-        <div class="rec-body">
-          <ul class="rec-bullets">
-            <li>라멘, 돈카츠, 우동 등 일식 전문</li>
-            <li>분할 가능한 구조 — 보조 분산 식사 적합</li>
-            <li>새벽에도 따뜻한 면류 제공</li>
-          </ul>
-          <div class="price-tag">💰 가격대: 12,000 ~ 15,000원</div>
-        </div>
-      </div>
-
-      <div style="background:var(--blue-light); border-radius:var(--radius); padding:14px; margin-top:4px;">
-        <div style="font-size:0.85rem; font-weight:700; color:var(--blue); margin-bottom:8px;">💡 26명 단체 식사 전략</div>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:6px;">
-          <li style="font-size:0.78rem; color:var(--blue); padding-left:16px; position:relative; line-height:1.5;">
-            <span style="position:absolute; left:0;">①</span>
-            플레잉 푸드코트를 1순위로 활용 (26명 수용, 메뉴 다양)
-          </li>
-          <li style="font-size:0.78rem; color:var(--blue); padding-left:16px; position:relative; line-height:1.5;">
-            <span style="position:absolute; left:0;">②</span>
-            인원 분산 시 고메브릿지(252-274게이트) 병행 이용
-          </li>
-          <li style="font-size:0.78rem; color:var(--blue); padding-left:16px; position:relative; line-height:1.5;">
-            <span style="position:absolute; left:0;">③</span>
-            새벽 00:00~06:00은 일부 메뉴 제한 가능 — 사전 전화 확인 권장
-          </li>
-        </ul>
-      </div>
-
-    </div>
 
     <div class="section-header" style="margin-top:8px;">
       <div class="section-icon">🛋️</div>
@@ -1863,13 +1802,6 @@
     </div>
 
     <div class="notes-section" style="margin-bottom:0">
-      <div class="note-card">
-        <div class="note-icon" style="background:#fdf6ec">☕</div>
-        <div class="note-content">
-          <div class="note-title">스타벅스 T2 (3층 248번 게이트)</div>
-          <div class="note-body"><strong>24시간 운영</strong> · 커피·음료·베이커리 · 면세구역 내 유일 스타벅스</div>
-        </div>
-      </div>
       <div class="note-card">
         <div class="note-icon" style="background:#eef2ff">🛋️</div>
         <div class="note-content">
@@ -1900,64 +1832,48 @@
 
     <div class="notes-section">
       <div class="note-card">
-        <div class="note-icon warn">⚠️</div>
-        <div class="note-content">
-          <div class="note-title">새벽 메뉴 제한 가능</div>
-          <div class="note-body">새벽 시간대 <strong>(00:00~06:00)</strong>에는 일부 메뉴가 제한될 수 있으며, 매장별 브레이크타임이 있을 수 있습니다.</div>
-        </div>
-      </div>
-
-      <div class="note-card">
         <div class="note-icon info">🛃</div>
         <div class="note-content">
           <div class="note-title">면세구역 입장 요건</div>
-          <div class="note-body">면세구역 식당은 <strong>보안검색 통과 후</strong> 이용 가능합니다. <strong>탑승권이 필요</strong>하며, 출국심사 전에는 일반구역 식당만 이용 가능합니다.</div>
+          <div class="note-body">면세구역(3·4층) 시설은 <strong>보안검색·출국심사 통과 후</strong> 이용 가능합니다. <strong>탑승권 필수</strong> · 예상 면세구역 진입: 06:20 이후</div>
         </div>
       </div>
 
       <div class="note-card">
-        <div class="note-icon tip">👥</div>
+        <div class="note-icon tip">🚻</div>
         <div class="note-content">
-          <div class="note-title">26명 단체의 경우</div>
-          <div class="note-body">인원이 많을 경우 <strong>푸드코트 형태</strong>(플레잉, 고메브릿지)를 활용해 좌석 확보에 유리합니다. 단체 예약은 별도로 운영되지 않을 수 있습니다.</div>
+          <div class="note-title">화장실 이용 안내</div>
+          <div class="note-body">화장실은 3·4층 전 구역 탑승구 인근마다 배치되어 있습니다. 보안검색 통과 전(일반구역)에도 이용 가능하며, <strong>면세구역에서는 게이트별로 모두 위치</strong>합니다.</div>
         </div>
       </div>
 
       <div class="note-card">
-        <div class="note-icon tip">💳</div>
+        <div class="note-icon warn">🚬</div>
         <div class="note-content">
-          <div class="note-title">결제 방법</div>
-          <div class="note-body">대부분의 매장에서 <strong>카드 결제 가능</strong>하며, <strong>키오스크 주문 시스템</strong>을 운영하는 매장도 있습니다.</div>
-        </div>
-      </div>
-
-      <div class="note-card">
-        <div class="note-icon update">🔔</div>
-        <div class="note-content">
-          <div class="note-title">2026년 변경사항 안내</div>
-          <div class="note-body">2026년 1월, <strong>고메브릿지(CJ프레시웨이)</strong>가 T2에 새로 오픈됨에 따라 일부 매장명·구성이 변경되었을 수 있습니다. 본 자료는 2025년 기준이므로 반드시 사전 확인 바랍니다.</div>
+          <div class="note-title">흡연실 이용 안내</div>
+          <div class="note-body">흡연은 <strong>지정 흡연실에서만</strong> 가능합니다. 3층 면세구역 내 8개소 운영 (223·225·235·247·254·264·274·276번 부근). 기내 흡연 절대 금지.</div>
         </div>
       </div>
 
       <div class="note-card">
         <div class="note-icon phone">📞</div>
         <div class="note-content">
-          <div class="note-title">사전 확인 권장</div>
+          <div class="note-title">공항 안내</div>
           <div class="note-body">
-            영업 여부 및 새벽 운영 확인은 방문 전 전화 문의 권장<br><br>
+            시설 위치 및 운영 현황 문의<br><br>
             <a href="tel:15772600" class="phone-link">📞 1577-2600</a>
-            <span style="font-size:0.72rem; color:var(--gray-500); margin-left:4px;">(인천공항 종합안내)</span>
+            <span style="font-size:0.72rem; color:var(--gray-500); margin-left:4px;">(인천공항 종합안내 07:00~22:00)</span>
           </div>
         </div>
       </div>
 
       <div style="margin: 8px 0 0; padding: 12px; background:var(--gray-100); border-radius:var(--radius); font-size:0.68rem; color:var(--gray-500); line-height:1.6; text-align:center;">
         본 자료는 2025년 기준 인천공항 공식 정보를 바탕으로 작성되었습니다.<br>
-        현장 상황에 따라 운영시간 및 메뉴가 변동될 수 있으니, 방문 전 전화 확인을 권장합니다.
+        운영시간은 변동될 수 있으니 방문 전 확인을 권장합니다.
       </div>
     </div>
     <div class="disclaimer-bar" style="margin: 8px 16px 12px;">
-      ⚠️ 본 자료는 2025년 기준 정보입니다. 영업시간·메뉴는 변동될 수 있으니 방문 전 확인 권장 (☎ 1577-2600)
+      ⚠️ 본 자료는 2025년 기준 정보입니다. 운영시간은 변동될 수 있으니 방문 전 확인 권장 (☎ 1577-2600)
     </div>
   </div>
 
@@ -2106,8 +2022,8 @@
 <!-- BOTTOM TAB BAR -->
 <nav class="bottom-tabs">
   <button class="tab-btn active" onclick="switchTab('list', this)">
-    <span class="tab-icon">📋</span>
-    <span class="tab-label">식당</span>
+    <span class="tab-icon">🏪</span>
+    <span class="tab-label">시설</span>
   </button>
   <button class="tab-btn" onclick="switchTab('map', this)">
     <span class="tab-icon">🗺️</span>
@@ -2318,161 +2234,6 @@ function renderSeatMap() {
 
 // ===== DATA =====
 const RESTAURANTS = [
-  // DUTY-FREE ZONE
-  {
-    id: 1, zone: 'duty', name: '효자공담', recommended: true,
-    cat: '한식', catIcon: '🍲',
-    floor: 4, gate: '249번', area: '플레잉 푸드코트',
-    hours: '00:00~24:00 (24시간)',
-    menu: '곰탕, 설렁탕, 한정식',
-    features: ['플레잉 푸드코트 내 위치', '새벽 국물 한식 대표'],
-    note: '공식 사이트 기준 24시간 운영 확인됨 (효자곰탕으로도 표기)',
-  },
-  {
-    id: 2, zone: 'duty', name: '호호가츠', recommended: true,
-    cat: '돈카츠', catIcon: '🍱',
-    floor: 4, gate: '249번', area: '플레잉 푸드코트',
-    hours: '00:00~24:00 (24시간)',
-    menu: '돈카츠, 가츠동, 카레',
-    features: ['플레잉 푸드코트 내 위치', '고소한 돈카츠 전문'],
-    note: '공식 사이트 기준 24시간 운영 확인됨',
-  },
-  {
-    id: 3, zone: 'duty', name: '소달반상',
-    cat: '한식', catIcon: '🍚',
-    floor: 4, gate: '249번', area: '플레잉 푸드코트',
-    hours: '00:00~24:00 (24시간)',
-    menu: '소고기 한정식, 반상 메뉴',
-    features: ['플레잉 푸드코트 내 위치'],
-    note: null,
-  },
-  {
-    id: 4, zone: 'duty', name: '콘타이',
-    cat: '태국식', catIcon: '🌶️',
-    floor: 4, gate: '249번', area: '플레잉 푸드코트',
-    hours: '00:00~24:00 (24시간)',
-    menu: '쌀국수, 팟타이, 똠얌꿍',
-    features: ['플레잉 푸드코트 내 위치', '태국식 전문'],
-    note: null,
-  },
-  {
-    id: 5, zone: 'duty', name: '택싱5',
-    cat: '분식', catIcon: '🥘',
-    floor: 4, gate: '249번', area: '플레잉 푸드코트',
-    hours: '00:00~24:00 (24시간)',
-    menu: '분식, 한식 퓨전',
-    features: ['플레잉 푸드코트 내 위치'],
-    note: null,
-  },
-  {
-    id: 6, zone: 'duty', name: '옥수고집', recommended: true,
-    cat: '한식', catIcon: '🍲',
-    floor: 4, gate: '252/253번', area: '고메브릿지 푸드코트',
-    hours: '00:00~24:00 (24시간)',
-    menu: '옥수수 한식, 국밥류',
-    features: ['고메브릿지 푸드코트 내 위치', '육수고집으로 변경 운영 가능 (2026년 기준)'],
-    note: '2026년 1월 고메브릿지(CJ프레시웨이) 오픈 후 매장명 변동 가능. 방문 전 확인 권장.',
-  },
-  {
-    id: 7, zone: 'duty', name: '자연담은한상',
-    cat: '한식', catIcon: '🍚',
-    floor: 4, gate: '274번', area: '고메브릿지 푸드코트',
-    hours: '00:00~24:00 (24시간)',
-    menu: '불고기 비빔밥, 한정식',
-    features: ['고메브릿지 푸드코트 내 위치', '2025 인천공항 맛있는 메뉴 대상'],
-    note: null,
-  },
-  {
-    id: 8, zone: 'duty', name: '소갈보올',
-    cat: '한식', catIcon: '🍖',
-    floor: 4, gate: '227번', area: '고메브릿지 푸드코트',
-    hours: '00:00~24:00 (24시간)',
-    menu: '소갈비, 갈비탕',
-    features: ['고메브릿지 푸드코트 내 위치'],
-    note: null,
-  },
-  {
-    id: 9, zone: 'duty', name: '무코쿠', recommended: true,
-    cat: '일식', catIcon: '🍜',
-    floor: 3, gate: '234번', area: null,
-    hours: '00:00~24:00 (24시간)',
-    menu: '라멘, 돈카츠, 우동, 카레',
-    features: ['일식 전문 매장', '분할 가능한 구조', '3층 위치 (엘리베이터/에스컬레이터 이용)'],
-    note: '공식 사이트 기준 24시간 운영 확인됨 (무쿄쿠로도 표기)',
-  },
-  {
-    id: 10, zone: 'duty', name: '스타벅스',
-    cat: '카페', catIcon: '☕',
-    floor: 4, gate: '249번', area: null,
-    hours: '운영시간 별도 확인 필요',
-    menu: '커피, 음료, 베이커리',
-    features: ['면세구역 카페', '새벽 운영 여부 사전 확인 권장'],
-    note: null,
-  },
-  {
-    id: 11, zone: 'duty', name: '파스쿠찌',
-    cat: '카페', catIcon: '☕',
-    floor: 4, gate: '268번', area: null,
-    hours: '00:00~24:00 (24시간)',
-    menu: '커피, 음료, 케이크',
-    features: ['면세구역 카페', '24시간 운영 확인'],
-    note: null,
-  },
-  {
-    id: 12, zone: 'duty', name: '투썸플레이스',
-    cat: '카페', catIcon: '☕',
-    floor: 4, gate: '231번', area: null,
-    hours: '운영시간 별도 확인 필요',
-    menu: '커피, 음료, 케이크',
-    features: ['면세구역 카페'],
-    note: null,
-  },
-  {
-    id: 13, zone: 'duty', name: '던킨',
-    cat: '카페', catIcon: '🍩',
-    floor: 3, gate: '253번', area: null,
-    hours: '00:00~24:00 (24시간)',
-    menu: '도넛, 커피, 음료',
-    features: ['면세구역 카페/디저트', '24시간 운영 확인'],
-    note: null,
-  },
-  {
-    id: 14, zone: 'duty', name: '리나스',
-    cat: '카페', catIcon: '☕',
-    floor: 3, gate: '266번', area: null,
-    hours: '운영시간 별도 확인 필요',
-    menu: '커피, 음료',
-    features: ['면세구역 카페'],
-    note: null,
-  },
-  // PUBLIC ZONE
-  {
-    id: 15, zone: 'public', name: '쉐이크쉑',
-    cat: '양식', catIcon: '🍔',
-    floor: 3, gate: 'G카운터 부근', area: null,
-    hours: '00:00~24:00 (24시간)',
-    menu: '햄버거, 밀크쉐이크, 감자튀김',
-    features: ['일반구역 — 탑승권 불필요', '24시간 운영 공식 확인'],
-    note: null,
-  },
-  {
-    id: 16, zone: 'public', name: '롯데리아',
-    cat: '패스트푸드', catIcon: '🍟',
-    floor: 3, gate: 'F카운터 부근', area: null,
-    hours: '00:00~24:00 (24시간)',
-    menu: '버거, 치킨, 감자튀김',
-    features: ['일반구역 — 탑승권 불필요', '24시간 운영 공식 확인'],
-    note: null,
-  },
-  {
-    id: 17, zone: 'public', name: '파리바게뜨',
-    cat: '베이커리', catIcon: '🥐',
-    floor: 3, gate: 'G카운터 부근', area: null,
-    hours: '운영시간 별도 확인 필요',
-    menu: '빵, 샌드위치, 커피',
-    features: ['일반구역 — 탑승권 불필요', '다양한 빵/샌드위치'],
-    note: null,
-  },
 
   // ===== 라운지 =====
   {
@@ -2562,11 +2323,11 @@ const RESTAURANTS = [
   },
   {
     id: 27, zone: 'duty', name: '흡연실',
-    cat: '편의시설', catIcon: '🏪',
-    floor: 3, gate: '223·225·235·247·254·264·274·276번 부근', area: null,
-    hours: '상시 (24시간)',
-    menu: '지정 흡연 공간',
-    features: ['✅ 24시간 이용 가능', '면세구역 내 8개소 운영', '지정 장소 외 흡연 엄금'],
+    cat: '편의시설', catIcon: '🚬',
+    floor: 3, gate: '231·232·247·248·253·254번 게이트 부근', area: null,
+    hours: '24시간',
+    menu: '지정 흡연 공간 (일반·전자담배 전용 구분)',
+    features: ['✅ 24시간 이용 가능', '231·232번: 전자담배 전용', '247·248·253·254번: 일반·전자담배 혼용', '지정 장소 외 흡연 엄금'],
     note: '탑승 전 반드시 지정 흡연실 이용 — 기내 흡연 절대 금지',
   },
 
@@ -2589,11 +2350,38 @@ const RESTAURANTS = [
     features: ['⚠️ 08:30 오픈 — 새벽 이용 불가', '당직 의료진 상주', '응급 상황 시 공항 안내데스크 경유'],
     note: '새벽 응급 시 → ☎ 032-741-3114 (공항 긴급연락처)',
   },
+
+  // ===== 화장실 =====
+  {
+    id: 30, zone: 'duty', name: '화장실 (4층 면세구역)',
+    cat: '편의시설', catIcon: '🚻',
+    floor: 4, gate: '232·241·248·257·268번 게이트 부근', area: null,
+    hours: '24시간',
+    menu: '남/여 화장실, 장애인 화장실, 기저귀 교환대',
+    features: ['✅ 24시간 이용 가능', '게이트 표지판 따라 이동 중 자연스럽게 지나침', '수유실도 G231·G257·G268 부근에 함께 위치'],
+    note: null,
+  },
+  {
+    id: 31, zone: 'duty', name: '화장실 (3층 면세구역)',
+    cat: '편의시설', catIcon: '🚻',
+    floor: 3, gate: '232·243·248·253·265번 게이트 부근', area: null,
+    hours: '24시간',
+    menu: '남/여 화장실, 장애인 화장실',
+    features: ['✅ 24시간 이용 가능', '흡연실(G231·G247·G254)과 인접한 경우 많음', '게이트 구역마다 반복 배치'],
+    note: null,
+  },
+  {
+    id: 32, zone: 'public', name: '화장실 (3층 일반구역)',
+    cat: '편의시설', catIcon: '🚻',
+    floor: 3, gate: '3층 체크인 F·G 카운터 구역 곳곳', area: null,
+    hours: '24시간',
+    menu: '남/여 화장실, 장애인 화장실',
+    features: ['✅ 24시간 이용 가능', '일반구역 — 탑승권 불필요', '출국심사 전 이용 권장'],
+    note: null,
+  },
 ];
 
 const CAT_ICONS = {
-  '한식': '🍚', '돈카츠': '🍱', '태국식': '🌶️', '분식': '🥘',
-  '일식': '🍜', '카페': '☕', '양식': '🍔', '패스트푸드': '🍟', '베이커리': '🥐',
   '라운지': '🛋️', '면세점': '🛍️', '편의시설': '🏪'
 };
 
@@ -2698,7 +2486,7 @@ function renderRestaurants() {
           <span class="detail-value">${r.hours}</span>
         </div>
         <div class="detail-row">
-          <span class="detail-label">주요 메뉴</span>
+          <span class="detail-label">주요 내용</span>
           <span class="detail-value">${r.menu}</span>
         </div>
         ${r.features.length ? `
