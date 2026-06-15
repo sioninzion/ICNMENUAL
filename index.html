@@ -196,7 +196,7 @@
       background: var(--white);
       border-top: 1px solid var(--gray-200);
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       z-index: 200;
       padding-bottom: env(safe-area-inset-bottom);
       box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
@@ -380,16 +380,23 @@
     }
     .seat-cell.win-l { border-left: 2px solid #93c5fd; background: #eff6ff; }
     .seat-cell.win-r { border-right: 2px solid #93c5fd; background: #eff6ff; }
+    .seat-cell.seat-empty {
+      background: #c5c5c5;
+      border-color: #a0a0a0;
+      color: #7a7a7a;
+      font-size: 0.65rem;
+      font-weight: 800;
+    }
+    .seat-cell.seat-empty::after { background: #a0a0a0; }
     .seat-cell.occupied {
       font-weight: 700;
       color: white;
     }
     .seat-cell.occupied::after { background: rgba(0,0,0,0.15); }
-    .seat-cell.occ-임원   { background: #7c3aed; border-color: #6d28d9; }
+    .seat-cell.occ-임원   { background: #7c3aed; border-color: #6d28d9; color: #fbcfe8; }
     .seat-cell.occ-공연팀  { background: var(--blue-mid); border-color: var(--blue); }
     .seat-cell.occ-청소년  { background: #10b981; border-color: #059669; }
-    .seat-cell.occ-어린이  { background: #f59e0b; border-color: #d97706; color: #1f2937; }
-    .seat-cell.occ-어린이::after { background: rgba(0,0,0,0.1); }
+    .seat-cell.occ-어린이  { background: #f59e0b; border-color: #d97706; }
     .seat-section-sep {
       display: flex;
       align-items: center;
@@ -1241,7 +1248,7 @@
 <div class="tab-screens">
 
   <!-- SCREEN 1: 위치 안내 -->
-  <div class="tab-screen active" id="screen-map">
+  <div class="tab-screen" id="screen-map">
     <div class="section-header">
       <div class="section-icon">🗺️</div>
       <h2>터미널 내 식당 위치 안내</h2>
@@ -1591,7 +1598,7 @@
   </div>
 
   <!-- SCREEN 2: 식당 리스트 -->
-  <div class="tab-screen" id="screen-list">
+  <div class="tab-screen active" id="screen-list">
     <div class="section-header">
       <div class="section-icon">📋</div>
       <h2>식당 리스트</h2>
@@ -1631,8 +1638,8 @@
     </div>
   </div>
 
-  <!-- SCREEN 3: 단체 추천 -->
-  <div class="tab-screen" id="screen-rec">
+  <!-- SCREEN 3: 기타정보 (추천 + 참고사항 통합) -->
+  <div class="tab-screen" id="screen-info">
     <div class="section-header">
       <div class="section-icon">🏆</div>
       <h2>26명 단체 식사 추천</h2>
@@ -1696,7 +1703,6 @@
         </div>
       </div>
 
-      <!-- Strategy tip -->
       <div style="background:var(--blue-light); border-radius:var(--radius); padding:14px; margin-top:4px;">
         <div style="font-size:0.85rem; font-weight:700; color:var(--blue); margin-bottom:8px;">💡 26명 단체 식사 전략</div>
         <ul style="list-style:none; display:flex; flex-direction:column; gap:6px;">
@@ -1716,11 +1722,8 @@
       </div>
 
     </div>
-  </div>
 
-  <!-- SCREEN 4: 참고사항 -->
-  <div class="tab-screen" id="screen-note">
-    <div class="section-header">
+    <div class="section-header" style="margin-top:8px;">
       <div class="section-icon">📌</div>
       <h2>참고사항</h2>
     </div>
@@ -1829,7 +1832,7 @@
       <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div>공연팀</div>
       <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>청소년</div>
       <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>어린이</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#f3f4f6;border:1px solid #e5e7eb"></div>빈좌석</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c5c5c5;border:1px solid #a0a0a0"></div>빈좌석(✕)</div>
     </div>
 
     <div class="cabin-wrap">
@@ -1934,21 +1937,13 @@
 
 <!-- BOTTOM TAB BAR -->
 <nav class="bottom-tabs">
-  <button class="tab-btn active" onclick="switchTab('map', this)">
-    <span class="tab-icon">🗺️</span>
-    <span class="tab-label">위치</span>
-  </button>
-  <button class="tab-btn" onclick="switchTab('list', this)">
+  <button class="tab-btn active" onclick="switchTab('list', this)">
     <span class="tab-icon">📋</span>
     <span class="tab-label">식당</span>
   </button>
-  <button class="tab-btn" onclick="switchTab('rec', this)">
-    <span class="tab-icon">🏆</span>
-    <span class="tab-label">추천</span>
-  </button>
-  <button class="tab-btn" onclick="switchTab('note', this)">
-    <span class="tab-icon">📌</span>
-    <span class="tab-label">참고</span>
+  <button class="tab-btn" onclick="switchTab('map', this)">
+    <span class="tab-icon">🗺️</span>
+    <span class="tab-label">위치</span>
   </button>
   <button class="tab-btn" onclick="switchTab('contact', this)">
     <span class="tab-icon">📞</span>
@@ -1957,6 +1952,10 @@
   <button class="tab-btn" onclick="switchTab('seat', this)">
     <span class="tab-icon">💺</span>
     <span class="tab-label">좌석</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('info', this)">
+    <span class="tab-icon">ℹ️</span>
+    <span class="tab-label">기타정보</span>
   </button>
 </nav>
 
@@ -2086,7 +2085,7 @@ function makeSeatCell(name, extraClass) {
     const abbr = getSeatAbbr(name);
     return `<div class="seat-cell occupied occ-${team} ${extraClass}" title="${name}">${abbr}</div>`;
   }
-  return `<div class="seat-cell ${extraClass}"></div>`;
+  return `<div class="seat-cell seat-empty ${extraClass}">✕</div>`;
 }
 
 function renderSeatMap() {
@@ -2451,7 +2450,7 @@ function closeModalBtn() {
 // ===== TOUCH SWIPE (between tabs) =====
 let touchStartX = 0;
 let touchStartY = 0;
-const tabOrder = ['map', 'list', 'rec', 'note', 'contact', 'seat'];
+const tabOrder = ['list', 'map', 'contact', 'seat', 'info'];
 
 document.addEventListener('touchstart', e => {
   touchStartX = e.touches[0].clientX;
