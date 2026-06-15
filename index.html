@@ -196,7 +196,7 @@
       background: var(--white);
       border-top: 1px solid var(--gray-200);
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       z-index: 200;
       padding-bottom: env(safe-area-inset-bottom);
       box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
@@ -219,6 +219,193 @@
     .tab-btn .tab-icon { font-size: 1.2rem; line-height: 1; }
     .tab-btn .tab-label { font-size: 0.58rem; font-weight: 600; white-space: nowrap; }
     .tab-btn.active .tab-icon { transform: scale(1.1); }
+
+    /* ===== SEAT MAP ===== */
+    .seat-direction-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 8px 16px 12px;
+    }
+    .seat-dir-btn {
+      padding: 10px 8px;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--gray-200);
+      background: var(--white);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      -webkit-tap-highlight-color: transparent;
+      line-height: 1.4;
+    }
+    .seat-dir-btn.active {
+      border-color: var(--blue-mid);
+      background: var(--blue-mid);
+      color: white;
+    }
+    .seat-dir-btn .dir-sub {
+      display: block;
+      font-size: 0.58rem;
+      font-weight: 500;
+      opacity: 0.8;
+      margin-top: 2px;
+    }
+    .seat-legend {
+      display: flex;
+      gap: 10px;
+      padding: 0 16px 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.68rem;
+      color: var(--gray-600);
+      font-weight: 500;
+    }
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .cabin-wrap {
+      margin: 0 12px 16px;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .cabin-info-bar {
+      background: linear-gradient(90deg, var(--blue) 0%, var(--blue-mid) 100%);
+      color: white;
+      padding: 8px 12px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-align: center;
+    }
+    .cabin-nose-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0 2px;
+    }
+    .cabin-nose {
+      width: 44px;
+      height: 18px;
+      border: 2px solid var(--gray-300);
+      border-bottom: none;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      background: var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.5rem;
+      color: var(--gray-400);
+      font-weight: 700;
+      padding-top: 4px;
+    }
+    .cabin-scroll-x {
+      overflow-x: auto;
+      padding: 6px 10px 14px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .cabin-scroll-x::-webkit-scrollbar { display: none; }
+    .cabin-seat-grid {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 300px;
+    }
+    .seat-col-header-row {
+      display: flex;
+      align-items: center;
+      padding-left: 24px;
+      margin-bottom: 2px;
+    }
+    .seat-col-lbl {
+      width: 28px;
+      text-align: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--gray-400);
+      flex-shrink: 0;
+    }
+    .seat-aisle-gap { width: 12px; flex-shrink: 0; }
+    .seat-row {
+      display: flex;
+      align-items: center;
+    }
+    .seat-row-num {
+      width: 24px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: var(--gray-500);
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .seat-section {
+      display: flex;
+      gap: 2px;
+    }
+    .seat-cell {
+      width: 28px;
+      height: 33px;
+      border-radius: 4px 4px 3px 3px;
+      border: 1.5px solid var(--gray-200);
+      background: var(--gray-50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.48rem;
+      color: var(--gray-300);
+      cursor: default;
+      flex-shrink: 0;
+      overflow: hidden;
+      text-align: center;
+      line-height: 1.2;
+      position: relative;
+    }
+    .seat-cell::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 2px; right: 2px;
+      height: 3px;
+      background: var(--gray-200);
+      border-radius: 0 0 2px 2px;
+    }
+    .seat-cell.win-l { border-left: 2px solid #93c5fd; background: #eff6ff; }
+    .seat-cell.win-r { border-right: 2px solid #93c5fd; background: #eff6ff; }
+    .seat-cell.occupied {
+      font-weight: 700;
+      color: white;
+    }
+    .seat-cell.occupied::after { background: rgba(0,0,0,0.15); }
+    .seat-cell.occ-임원   { background: #7c3aed; border-color: #6d28d9; }
+    .seat-cell.occ-공연팀  { background: var(--blue-mid); border-color: var(--blue); }
+    .seat-cell.occ-청소년  { background: #10b981; border-color: #059669; }
+    .seat-cell.occ-어린이  { background: #f59e0b; border-color: #d97706; color: #1f2937; }
+    .seat-cell.occ-어린이::after { background: rgba(0,0,0,0.1); }
+    .seat-section-sep {
+      display: flex;
+      align-items: center;
+      margin: 4px 0;
+      padding-left: 24px;
+    }
+    .sep-line {
+      flex: 1;
+      border-top: 1.5px dashed var(--gray-200);
+      margin: 0 6px;
+    }
+    .sep-text {
+      font-size: 0.58rem;
+      color: var(--gray-400);
+      white-space: nowrap;
+    }
 
     /* ===== SECTION HEADERS ===== */
     .section-header {
@@ -1619,6 +1806,41 @@
     <div class="contact-section" id="contact-list"></div>
   </div>
 
+  <!-- SCREEN 6: 자리 배치 -->
+  <div class="tab-screen" id="screen-seat">
+    <div class="section-header">
+      <div class="section-icon">💺</div>
+      <h2>자리 배치</h2>
+    </div>
+
+    <div class="seat-direction-toggle">
+      <button class="seat-dir-btn active" id="seat-btn-going" onclick="setSeatDir('going', this)">
+        ✈️ 갈 때
+        <span class="dir-sub">인천 → 울란바타르</span>
+      </button>
+      <button class="seat-dir-btn" id="seat-btn-return" onclick="setSeatDir('return', this)">
+        🛬 올 때
+        <span class="dir-sub">울란바타르 → 인천</span>
+      </button>
+    </div>
+
+    <div class="seat-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div>임원</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#2563eb"></div>공연팀</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#10b981"></div>청소년</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div>어린이</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f3f4f6;border:1px solid #e5e7eb"></div>빈좌석</div>
+    </div>
+
+    <div class="cabin-wrap">
+      <div class="cabin-info-bar" id="seat-route-bar">🛫 대한항공 B777-200ER · 3-3-3 배열</div>
+      <div class="cabin-nose-wrap"><div class="cabin-nose">앞</div></div>
+      <div class="cabin-scroll-x" id="seat-cabin-scroll">
+        <div class="cabin-seat-grid" id="seat-grid"></div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1732,6 +1954,10 @@
     <span class="tab-icon">📞</span>
     <span class="tab-label">연락처</span>
   </button>
+  <button class="tab-btn" onclick="switchTab('seat', this)">
+    <span class="tab-icon">💺</span>
+    <span class="tab-label">좌석</span>
+  </button>
 </nav>
 
 <!-- RESTAURANT DETAIL MODAL -->
@@ -1785,6 +2011,143 @@ const CONTACTS = [
   { name: '한수호',  team: '청소년', role: '팀원',  phone: '010-3544-4551' },
   { name: '함유빈',  team: '공연팀', role: '팀장',  phone: '010-3933-4357' },
 ];
+
+// ===== SEAT MAP DATA =====
+const SEAT_MAP = {
+  going: {
+    route: '인천 → 울란바타르  KE861',
+    sections: [
+      {
+        rows: [29, 30, 31, 32, 33, 34, 35],
+        assignments: {
+          29: { D: '이우주',   E: '김영진',   F: '권오준' },
+          30: { D: '최예담',   E: '함유빈',   F: '곽도영',   G: '이형준' },
+          31: { E: '이예현',   F: '남시은' },
+          32: { D: '노시온',   E: '김범서',   F: '이찬미' },
+          33: {},
+          34: { D: '유희원',   E: '김지원06' },
+          35: { D: '우성원',   E: '김우림' }
+        }
+      },
+      {
+        rows: [59, 60],
+        assignments: {
+          59: { A: '이예진',   B: '최원석',   D: '최정현',   E: '김용빈' },
+          60: { A: '이예슬',   B: '한수호',   D: '김승민',   E: '김지은',   G: '김지원07', H: '한예진' }
+        }
+      }
+    ]
+  },
+  return: {
+    route: '울란바타르 → 인천  KE862',
+    sections: [
+      {
+        rows: [53, 54, 55, 56, 57, 58, 59, 60],
+        assignments: {
+          53: { C: '한수호',   D: '최원석',   E: '김지원06', F: '김우림' },
+          54: { C: '최예담',   D: '이찬미',   E: '한예진',   F: '이예슬' },
+          55: { C: '김지원07', D: '유희원',   E: '함유빈',   F: '김승민' },
+          56: { D: '남시은',   E: '이예진' },
+          57: {},
+          58: { D: '권오준',   E: '김지은',   G: '이우주',   H: '김범서' },
+          59: { D: '우성원',   E: '이예현',   G: '김영진',   H: '김용빈' },
+          60: { A: '노시온',   B: '곽도영',   D: '이형준',   E: '최정현' }
+        }
+      }
+    ]
+  }
+};
+
+const SEAT_COLS = { left: ['A','B','C'], mid: ['D','E','F'], right: ['G','H','J'] };
+const SEAT_NAME_TEAM = {};
+let currentSeatDir = 'going';
+
+function buildSeatNameTeam() {
+  CONTACTS.forEach(c => { SEAT_NAME_TEAM[c.name] = c.team; });
+}
+
+function getSeatAbbr(name) {
+  if (name === '김지원06') return '지원6';
+  if (name === '김지원07') return '지원7';
+  if (name === '최원석')   return '목사님';
+  return name;
+}
+
+function setSeatDir(dir, btn) {
+  currentSeatDir = dir;
+  document.querySelectorAll('.seat-dir-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSeatMap();
+}
+
+function makeSeatCell(name, extraClass) {
+  if (name) {
+    const team = SEAT_NAME_TEAM[name] || '임원';
+    const abbr = getSeatAbbr(name);
+    return `<div class="seat-cell occupied occ-${team} ${extraClass}" title="${name}">${abbr}</div>`;
+  }
+  return `<div class="seat-cell ${extraClass}"></div>`;
+}
+
+function renderSeatMap() {
+  const grid = document.getElementById('seat-grid');
+  const bar = document.getElementById('seat-route-bar');
+  if (!grid) return;
+
+  const data = SEAT_MAP[currentSeatDir];
+  bar.textContent = '🛫 대한항공 B777-200ER · 3-3-3 배열  ·  ' + data.route;
+
+  let html = '';
+
+  // Column header
+  html += '<div class="seat-col-header-row">';
+  SEAT_COLS.left.forEach(c  => { html += `<div class="seat-col-lbl">${c}</div>`; });
+  html += '<div class="seat-aisle-gap"></div>';
+  SEAT_COLS.mid.forEach(c   => { html += `<div class="seat-col-lbl">${c}</div>`; });
+  html += '<div class="seat-aisle-gap"></div>';
+  SEAT_COLS.right.forEach(c => { html += `<div class="seat-col-lbl">${c}</div>`; });
+  html += '</div>';
+
+  data.sections.forEach((sec, si) => {
+    if (si > 0) {
+      html += `<div class="seat-section-sep">
+        <div class="sep-line"></div>
+        <div class="sep-text">⋯ 중간 좌석 생략</div>
+        <div class="sep-line"></div>
+      </div>`;
+    }
+
+    sec.rows.forEach(row => {
+      const a = sec.assignments[row] || {};
+      html += '<div class="seat-row">';
+      html += `<div class="seat-row-num">${row}</div>`;
+
+      html += '<div class="seat-section">';
+      html += makeSeatCell(a['A'], 'win-l');
+      html += makeSeatCell(a['B'], '');
+      html += makeSeatCell(a['C'], '');
+      html += '</div>';
+
+      html += '<div class="seat-aisle-gap"></div>';
+      html += '<div class="seat-section">';
+      html += makeSeatCell(a['D'], '');
+      html += makeSeatCell(a['E'], '');
+      html += makeSeatCell(a['F'], '');
+      html += '</div>';
+
+      html += '<div class="seat-aisle-gap"></div>';
+      html += '<div class="seat-section">';
+      html += makeSeatCell(a['G'], '');
+      html += makeSeatCell(a['H'], '');
+      html += makeSeatCell(a['J'], 'win-r');
+      html += '</div>';
+
+      html += '</div>';
+    });
+  });
+
+  grid.innerHTML = html;
+}
 
 // ===== DATA =====
 const RESTAURANTS = [
@@ -1959,6 +2322,8 @@ let currentContactTeam = 'all';
 function init() {
   renderRestaurants();
   renderContacts();
+  buildSeatNameTeam();
+  renderSeatMap();
 }
 
 // ===== TABS =====
@@ -2086,7 +2451,7 @@ function closeModalBtn() {
 // ===== TOUCH SWIPE (between tabs) =====
 let touchStartX = 0;
 let touchStartY = 0;
-const tabOrder = ['map', 'list', 'rec', 'note', 'contact'];
+const tabOrder = ['map', 'list', 'rec', 'note', 'contact', 'seat'];
 
 document.addEventListener('touchstart', e => {
   touchStartX = e.touches[0].clientX;
@@ -2100,7 +2465,7 @@ document.addEventListener('touchend', e => {
   // Only horizontal swipe
   if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
   // Don't swipe inside filter chips, map scroll, or modals
-  if (e.target.closest('.filter-row') || e.target.closest('.modal-sheet') || e.target.closest('.map-scroll-container')) return;
+  if (e.target.closest('.filter-row') || e.target.closest('.modal-sheet') || e.target.closest('.map-scroll-container') || e.target.closest('.cabin-scroll-x')) return;
 
   const activeScreen = document.querySelector('.tab-screen.active');
   if (!activeScreen) return;
