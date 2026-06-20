@@ -1,4 +1,4 @@
-const CACHE = 'airport-guide-v1';
+const CACHE = 'airport-guide-v2';
 const STATIC = [
   './',
   './index.html',
