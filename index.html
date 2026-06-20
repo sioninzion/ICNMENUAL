@@ -6,9 +6,22 @@
   <title>인천공항 T2 새벽 출국 안내</title>
   <meta name="description" content="인천공항 제2여객터미널 새벽 이용 가능 시설 안내 - 6/26(목) 몽골 올란바타르 출국 26명 단체">
   <meta name="theme-color" content="#1a3a8f">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="공항 안내">
+  <link rel="apple-touch-icon" href="thum.png">
   <style>
+    @font-face {
+      font-family: 'Kkukkukk';
+      src: url('./kkukkukk/MemomentKkukkukk.otf') format('opentype'),
+           url('./kkukkukk/MemomentKkukkukk.ttf') format('truetype');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -39,7 +52,7 @@
 
     html { font-size: 16px; }
     body {
-      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Kkukkukk', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--gray-100);
       color: var(--gray-800);
       -webkit-font-smoothing: antialiased;
@@ -2726,6 +2739,14 @@ function closeTimetableBtn() {
 
 // ===== RUN =====
 init();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js');
+  });
+}
 </script>
 </body>
 </html>

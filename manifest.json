@@ -1,0 +1,25 @@
+{
+  "name": "인천공항 T2 새벽 출국 안내",
+  "short_name": "공항 안내",
+  "description": "6/26(목) 몽골 출국 단체 공항 시설·좌석·일정 안내",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a3a8f",
+  "theme_color": "#1a3a8f",
+  "orientation": "portrait-primary",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "thum.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "thum.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
