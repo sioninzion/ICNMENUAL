@@ -535,6 +535,7 @@
     .cat-라운지   { background: #eef2ff; }
     .cat-면세점   { background: #fdf4ff; }
     .cat-편의시설  { background: #f0fdf4; }
+    .cat-식당     { background: #fef9c3; }
 
     /* ===== 이동 안내 카드 ===== */
     .move-guide-card {
@@ -1146,6 +1147,7 @@
     .cat-label.라운지 { background: #eef2ff; color: #3730a3; }
     .cat-label.면세점 { background: #fdf4ff; color: #6d28d9; }
     .cat-label.편의시설 { background: #f0fdf4; color: #166534; }
+    .cat-label.식당 { background: #fef9c3; color: #78350f; }
 
     .disclaimer-bar {
       margin: 8px 16px 0;
@@ -1721,6 +1723,13 @@
         </div>
         <div class="foodcourt-item">
           <div>
+            <div class="foodcourt-name">🍽️ 24시간 식당</div>
+            <div class="foodcourt-loc">📍 4층 G.227·249·274 / 3층 G.234 (플레잉·고메브릿지 등)</div>
+          </div>
+          <span class="foodcourt-count">6곳↑</span>
+        </div>
+        <div class="foodcourt-item">
+          <div>
             <div class="foodcourt-name">🚻 화장실 · 수유실 · 키즈존</div>
             <div class="foodcourt-loc">📍 3·4층 전 구역 분산 배치 (24시간)</div>
           </div>
@@ -1769,7 +1778,7 @@
     <div class="zone-toggle">
       <button class="zone-btn active" data-zone="duty" onclick="filterZone('duty', this)">
         🛃 면세구역
-        <span class="zone-badge">12곳</span>
+        <span class="zone-badge">20곳</span>
       </button>
       <button class="zone-btn" data-zone="public" onclick="filterZone('public', this)">
         🏬 일반구역
@@ -1783,6 +1792,7 @@
       <button class="chip" data-cat="라운지" onclick="filterCat('라운지', this)">🛋️ 라운지</button>
       <button class="chip" data-cat="면세점" onclick="filterCat('면세점', this)">🛍️ 면세점</button>
       <button class="chip" data-cat="편의시설" onclick="filterCat('편의시설', this)">🏪 편의시설</button>
+      <button class="chip" data-cat="식당" onclick="filterCat('식당', this)">🍽️ 식당</button>
     </div>
 
     <!-- Restaurant/Facility List -->
@@ -1821,6 +1831,13 @@
         <div class="note-content">
           <div class="note-title">키즈존 / 수유실</div>
           <div class="note-body"><strong>24시간</strong> · 키즈존: 242·246·254·257번 게이트 / 수유실: 221·231·243번 외 6개소</div>
+        </div>
+      </div>
+      <div class="note-card">
+        <div class="note-icon" style="background:#fef9c3">🍽️</div>
+        <div class="note-content">
+          <div class="note-title">24시간 식당 (면세구역)</div>
+          <div class="note-body"><strong>효자곰탕·호호카츠</strong> (4층 G.249 플레잉 푸드코트) · <strong>육수고집·자연담은한상</strong> (4층 G.274) · <strong>롯데리아</strong> (4층 G.227) · <strong>무쿄쿠</strong> (3층 G.234) — 시설 탭에서 확인</div>
         </div>
       </div>
     </div>
@@ -1946,7 +1963,7 @@
     <div class="modal-body">
 
       <div class="timeline-item highlight">
-        <div class="timeline-time">3:40 ~ 4:00</div>
+        <div class="timeline-time">3:00 ~ 4:00</div>
         <div class="timeline-content">
           <div class="timeline-main">🏛️ 자양교회 앞 집결 및 수하물 싣기</div>
           <div class="timeline-note">26명 수하물 적재</div>
@@ -2379,10 +2396,84 @@ const RESTAURANTS = [
     features: ['✅ 24시간 이용 가능', '일반구역 — 탑승권 불필요', '출국심사 전 이용 권장'],
     note: null,
   },
+
+  // ===== 식당 (면세구역) =====
+  {
+    id: 33, zone: 'duty', name: '효자곰탕',
+    cat: '식당', catIcon: '🍲',
+    floor: 4, gate: '249번', area: '플레잉 푸드코트',
+    hours: '24시간',
+    menu: '곰탕, 설렁탕, 한정식',
+    features: ['✅ 24시간 운영 — 새벽 이용 가능', '249번 게이트 옆 플레잉 푸드코트 내'],
+    note: null,
+  },
+  {
+    id: 34, zone: 'duty', name: '호호카츠',
+    cat: '식당', catIcon: '🍱',
+    floor: 4, gate: '249번', area: '플레잉 푸드코트',
+    hours: '24시간',
+    menu: '돈카츠, 가츠동, 카레',
+    features: ['✅ 24시간 운영 — 새벽 이용 가능', '249번 게이트 옆 플레잉 푸드코트 내'],
+    note: null,
+  },
+  {
+    id: 35, zone: 'duty', name: '무쿄쿠',
+    cat: '식당', catIcon: '🍜',
+    floor: 3, gate: '234번', area: null,
+    hours: '24시간',
+    menu: '라멘, 우동, 돈카츠, 카레',
+    features: ['✅ 24시간 운영 — 새벽 이용 가능', '3층 면세구역 — 4층에서 에스컬레이터/엘리베이터 이용'],
+    note: '3층 위치 — 출국심사 후 아래층 이동 필요',
+  },
+  {
+    id: 36, zone: 'duty', name: '육수고집',
+    cat: '식당', catIcon: '🍲',
+    floor: 4, gate: '274번', area: '고메브릿지 푸드코트',
+    hours: '24시간',
+    menu: '설렁탕, 국밥, 곰탕',
+    features: ['✅ 24시간 운영 — 새벽 이용 가능', '274번 구역 고메브릿지 푸드코트 내'],
+    note: null,
+  },
+  {
+    id: 37, zone: 'duty', name: '자연담은한상',
+    cat: '식당', catIcon: '🍚',
+    floor: 4, gate: '274번', area: '고메브릿지 푸드코트',
+    hours: '24시간',
+    menu: '비빔밥, 불고기 정식, 반상',
+    features: ['✅ 24시간 운영 — 새벽 이용 가능', '274번 구역 고메브릿지 푸드코트 내'],
+    note: null,
+  },
+  {
+    id: 38, zone: 'duty', name: '롯데리아',
+    cat: '식당', catIcon: '🍔',
+    floor: 4, gate: '227번', area: null,
+    hours: '24시간',
+    menu: '버거, 치킨, 감자튀김',
+    features: ['✅ 24시간 운영 — 새벽 이용 가능', '면세구역 내 패스트푸드 (4층 G.227)'],
+    note: null,
+  },
+  {
+    id: 39, zone: 'duty', name: '콘타이',
+    cat: '식당', catIcon: '🌶️',
+    floor: 4, gate: '249번', area: '플레잉 푸드코트',
+    hours: '06:00~22:00',
+    menu: '쌀국수, 팟타이, 똠얌꿍',
+    features: ['249번 게이트 옆 플레잉 푸드코트 내', '태국식 전문'],
+    note: null,
+  },
+  {
+    id: 40, zone: 'duty', name: '고피자',
+    cat: '식당', catIcon: '🍕',
+    floor: 3, gate: '235번', area: null,
+    hours: '06:00~22:00',
+    menu: '개인 사이즈 화덕 피자, 파스타',
+    features: ['3층 면세구역 — 4층에서 에스컬레이터/엘리베이터 이용', '1인용 미니 피자 특화'],
+    note: null,
+  },
 ];
 
 const CAT_ICONS = {
-  '라운지': '🛋️', '면세점': '🛍️', '편의시설': '🏪'
+  '라운지': '🛋️', '면세점': '🛍️', '편의시설': '🏪', '식당': '🍽️'
 };
 
 // ===== STATE =====
@@ -2486,7 +2577,7 @@ function renderRestaurants() {
           <span class="detail-value">${r.hours}</span>
         </div>
         <div class="detail-row">
-          <span class="detail-label">주요 내용</span>
+          <span class="detail-label">${r.cat === '식당' ? '주요 메뉴' : '주요 내용'}</span>
           <span class="detail-value">${r.menu}</span>
         </div>
         ${r.features.length ? `
